@@ -13,7 +13,7 @@ compliant with the meta model specification provided in
 ### Project Structure
 
 
-## License
+<!-- ## License -->
 
 
 ## Dependencies
@@ -27,14 +27,14 @@ OWL2AAS requires the following Python packages to be installed for production us
 
 ### Installation
 
-For production usage and building applications with OWL2AAS, we recommended installation from PyPI:
+You can install OWL2AAS using pip:
 
 ```bash
-pip install 
+pip install -r requirements.txt
 ```
 
 
-### Examples and Tutorials
+### Example
 
 Example usage `python -m owl2aas.cli 'owl2aas/examples/mas4aiDEMO.ttl' -c 'http://www.tno.nl/mas4aiDEMO#RoboticArm'`
 Generates `mas4aiDEMO_template.aas.ttl` file with the basic AAS template.
@@ -44,7 +44,7 @@ Generates `mas4aiDEMO_template.aas.ttl` file with the basic AAS template.
 If you plan contributing code to this repository, please get in touch with us via e-mail first: mark.van.der.pas@semaku.ccom
 
 
-### Codestyle and Testing
+<!-- ### Codestyle and Testing
 
 Our code follows the [PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/).
 Additionally, we use [PEP 484 -- Type Hints](https://www.python.org/dev/peps/pep-0484/) throughout the code to enable type checking the code.
@@ -52,4 +52,4 @@ Additionally, we use [PEP 484 -- Type Hints](https://www.python.org/dev/peps/pep
 
 ### Contribute Code/Patches
 
-TBD
+TBD -->
