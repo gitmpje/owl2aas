@@ -1,0 +1,35 @@
+CONSTRUCT {
+  # Submodel Element Collection (SMC)
+  ?SMC_iri a aas:SubmodelElementCollection ;
+    aassem:semanticId [
+      a aas:Reference ;
+      aasref:keys [
+        a aas:Key ;
+        aaskey:idType aaskeyt:IRI ;
+        aaskey:value ?Property ;
+      ] ;
+    ] ;
+    prov:wasDerivedFrom ?Property, ?Class ;
+  .
+}
+WHERE {
+  VALUES ?PropertyType {owl:ObjectProperty owl:DatatypeProperty}
+  {
+    ?Property a ?PropertyType ;
+      owl:maxCardinality ?maxCardinality .
+    FILTER( ?maxCardinality > 1 )
+  } UNION {
+    ?Property a ?PropertyType .
+    FILTER NOT EXISTS { ?Property owl:maxCardinality [] } #if owl:maxCardinality>1 or not defined then embed the property in an ElementCollection
+  }
+
+  OPTIONAL { ?Property owl:range ?Class }
+
+  FILTER NOT EXISTS {
+    #exclude object properties 'directly related to' a 'main' MAS4AI class
+    ?Property a owl:ObjectProperty ;
+      rdfs:domain/mas4ai:hasInterface [] .
+  }
+
+  BIND(iri(concat( "http://mas4ai.eu/id/smc/template/", struuid() )) as ?SMC_iri)
+}
