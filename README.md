@@ -10,7 +10,7 @@ compliant with the meta model specification provided in
 * Conversion of OWL2 ontology to a basic AAS, both using RDF syntax.
 
 
-### Project Structure
+<!-- ### Project Structure -->
 
 
 <!-- ## License -->

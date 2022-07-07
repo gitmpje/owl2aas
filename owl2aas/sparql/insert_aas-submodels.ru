@@ -16,5 +16,6 @@ WHERE {
       rdfs:range ?Class .
   } UNION {
     ?AASClass mas4ai:hasInterface [] .
+    BIND(?AASClass as ?Class)
   }
 }

@@ -18,7 +18,21 @@ WHERE {
 
     ?SubmodelElement a aas:SubmodelElementCollection ;
       prov:wasDerivedFrom ?Property .
+
     FILTER NOT EXISTS { ?Property owl:maxCardinality 1 }
+  } UNION {
+    ?Submodel a aas:Submodel ;
+      prov:wasDerivedFrom ?DomainClass .
+
+    ?SubmodelElement a aas:SubmodelElementCollection ;
+      prov:wasDerivedFrom ?RangeClass .
+
+    FILTER EXISTS {
+      ?Property a owl:ObjectProperty ;
+        rdfs:domain ?DomainClass ;
+        rdfs:range ?RangeClass .
+    }
+    FILTER NOT EXISTS { ?DomainClass mas4ai:hasInterface [] }
   }
 
   #exclude nested submodel elements
