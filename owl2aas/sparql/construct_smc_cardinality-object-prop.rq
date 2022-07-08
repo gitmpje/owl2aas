@@ -23,6 +23,7 @@ WHERE {
   }
 
   ?Property rdfs:range ?Class .
+  FILTER NOT EXISTS { [] rdfs:subClassOf ?Class }
 
   FILTER EXISTS {
     #only include classes 'directly related to' the 'main' MAS4AI class

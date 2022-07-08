@@ -13,6 +13,7 @@ WHERE {
   } UNION {
     ?SMC a aas:SubmodelElementCollection ;
       prov:wasDerivedFrom ?Property .
+    FILTER NOT EXISTS { ?SMC prov:wasDerivedFrom/a owl:Class }
   }
 
   ?SubmodelElementType rdfs:subClassOf+ aas:SubmodelElement .

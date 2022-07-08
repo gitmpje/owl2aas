@@ -22,13 +22,14 @@ WHERE {
   } }
 
   ?Object prov:wasDerivedFrom ?Resource .
-  ?Resource rdfs:label ?label .
+  OPTIONAL { ?Resource rdfs:label ?label }
   OPTIONAL {
     ?Resource rdfs:label ?label_en .
     FILTER(lang(?label_en)='en')
   }
   OPTIONAL { ?Object aasrefer:idShort ?_idShort }
-  BIND ( REPLACE(COALESCE(?_idShort, ?label_en, ?label), "[-//(), ]", "_") AS ?idShort )
+  BIND ( REPLACE(str(?Resource), ".+[//#]([a-z0-9_]+)$", "$1") as ?noLabel)
+  BIND ( REPLACE(COALESCE(?_idShort, ?label_en, ?label, ?noLabel), "[-//(), ]", "_") AS ?idShort )
 
   OPTIONAL {
     ?Resource rdfs:comment ?comment .

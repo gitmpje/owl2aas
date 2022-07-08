@@ -19,7 +19,7 @@ WHERE {
     ?Property rdfs:range ?Class .
 
     FILTER EXISTS { ?Property rdfs:domain/mas4ai:hasInterface [] }
-    FILTER NOT EXISTS { [] rdfs:subClassOf ?Class }
+    FILTER NOT EXISTS { ?Class rdfs:subClassOf/^rdfs:range ?Property }
   } UNION {
     ?Class mas4ai:hasInterface [] #Submodel for main class (data type properties)
   }

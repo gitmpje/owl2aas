@@ -28,3 +28,15 @@ WHERE {
   ?SubClass rdfs:subClassOf+ ?Class .
 }
 ''')
+
+    g_owl.update('''
+INSERT {
+  ?Property rdfs:range ?SubClass
+}
+WHERE {
+  VALUES ?PropertyType {owl:ObjectProperty owl:DatatypeProperty}
+  ?Property a ?PropertyType ;
+    rdfs:range ?Class .
+  ?SubClass rdfs:subClassOf+ ?Class .
+}
+''')

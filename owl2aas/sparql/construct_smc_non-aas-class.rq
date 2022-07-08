@@ -13,20 +13,13 @@ CONSTRUCT {
   .
 }
 WHERE {
-  {
-    ?Class a owl:Class .
-  } UNION {
-    ?Class a rdfs:Class .
-  }
-
-  ?Property rdfs:range ?Class .
+  { ?Class a owl:Class } UNION { ?Class a rdfs:Class }
 
   FILTER EXISTS { [] rdfs:domain ?Class }
-  FILTER NOT EXISTS { ?Class mas4ai:hasInterface [] }
+  FILTER NOT EXISTS { ?Class rdfs:subClassOf*/mas4ai:hasInterface [] }
   FILTER NOT EXISTS {
     #exclude classes 'directly related to' the 'main' MAS4AI class
-    ?Property rdfs:domain/mas4ai:hasInterface [] ;
-      rdfs:range ?Class .
+    ?Class ^rdfs:range/rdfs:domain/mas4ai:hasInterface [] .
   }
 
   BIND(iri(concat( "http://mas4ai.eu/id/smc/template/", struuid() )) as ?SMC_iri)
