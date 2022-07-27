@@ -16,6 +16,7 @@ WHERE {
   { ?Class a owl:Class } UNION { ?Class a rdfs:Class }
 
   FILTER EXISTS { [] rdfs:domain ?Class }
+  FILTER EXISTS { [] rdfs:range ?Class }
   FILTER NOT EXISTS { ?Class rdfs:subClassOf*/mas4ai:hasInterface [] }
   FILTER NOT EXISTS {
     #exclude classes 'directly related to' the 'main' MAS4AI class

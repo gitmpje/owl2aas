@@ -38,6 +38,7 @@ WHERE {
   #exclude nested submodel elements
   FILTER NOT EXISTS {
     [] a aas:SubmodelElementCollection ;
+      prov:wasDerivedFrom ?Class ;
       aassmc:value ?SubmodelElement .
   }
 }
