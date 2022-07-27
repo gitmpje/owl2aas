@@ -7,15 +7,17 @@ WHERE {
   ?AAS a aas:AssetAdministrationShell ;
     prov:wasDerivedFrom ?AASClass .
 
-  ?Submodel a aas:Submodel ;
-    prov:wasDerivedFrom ?Class .
+  ?Submodel a aas:Submodel .
 
   {
+    ?Submodel prov:wasDerivedFrom ?Class, ?Property .
     ?Property a owl:ObjectProperty ;
       rdfs:domain ?AASClass ;
       rdfs:range ?Class .
   } UNION {
+    ?Submodel prov:wasDerivedFrom ?AASClass .
     ?AASClass mas4ai:hasInterface [] .
-    BIND(?AASClass as ?Class)
+  
+    FILTER NOT EXISTS { ?Submodel prov:wasDerivedFrom/a owl:ObjectProperty }
   }
 }

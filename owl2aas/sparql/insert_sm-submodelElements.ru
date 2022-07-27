@@ -12,6 +12,14 @@ WHERE {
       rdfs:domain ?Class .
 
     ?SubmodelElement prov:wasDerivedFrom ?Property .
+
+    FILTER NOT EXISTS { ?Submodel prov:wasDerivedFrom/rdfs:range/mas4ai:hasInterface [] }
+  } UNION {
+    ?Submodel a aas:Submodel ;
+      prov:wasDerivedFrom ?Property .
+  
+    ?SubmodelElement a aas:ReferenceElement ;
+      prov:wasDerivedFrom ?Property .
   } UNION {
     ?Submodel a aas:Submodel ;
       prov:wasDerivedFrom ?Property .

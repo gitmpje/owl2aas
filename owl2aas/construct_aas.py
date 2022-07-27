@@ -67,6 +67,7 @@ def construct_aas(g_in: Graph):
 
     g_out.parse(data=g_owl.query(construct_asset_administration_shell).graph.serialize())
     g_conj.update(insert_aas_submodels)
+    g_conj.update(insert_refe_value)
 
     g_conj.update(insert_aas_environment)
 
