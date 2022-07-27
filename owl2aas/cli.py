@@ -20,8 +20,8 @@ def parse_cli_arguments() -> argparse.ArgumentParser:
 
     parser.add_argument('input_file', help="path to OWL2 RDF file")
     parser.add_argument('-o', '--output', help="path to store output AAS RDF file")
-    parser.add_argument('-c', '--aas_class', help="list of classes for which to generate an AAS", nargs='+', action='append', default=None)
-    parser.add_argument('-v', '--verbose', help="Print detailed information for each step in the process.", default=0)
+    parser.add_argument('-c', '--aas_class', help="list of classes for which to generate an AAS", nargs='+', default=None)
+    parser.add_argument('-v', '--verbose', help="Print detailed information for each step in the process.", action="store_true")
     parser.add_argument('-l', '--logfile', help="Log file to be created in addition to output to stdout", default=None)
     # group = parser.add_mutually_exclusive_group(required=True)
     # group.add_argument('--json', help="Use AAS json format when checking or creating files", action='store_true')
