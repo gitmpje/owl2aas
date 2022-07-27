@@ -11,7 +11,7 @@
 
 <http://www.tno.nl/mas4aiDEMO>
   a owl:Ontology ;
-  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  # owl:imports <http://www.w3.org/2004/02/skos/core> ;
   owl:versionInfo "Created with TopBraid Composer" ;
 .
 mas4aiDEMO:ControlledBy
