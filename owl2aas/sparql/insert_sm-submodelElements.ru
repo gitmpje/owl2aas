@@ -33,15 +33,6 @@ WHERE {
         rdfs:range ?RangeClass .
     }
     FILTER NOT EXISTS { ?DomainClass mas4ai:hasInterface [] }
-    FILTER NOT EXISTS { [] rdfs:subClassOf ?DomainClass }
-  } UNION {
-    ?Submodel a aas:Submodel ;
-      prov:wasDerivedFrom ?Class .
-
-    ?SubmodelElement a aas:SubmodelElementCollection ;
-      prov:wasDerivedFrom ?SubClass .
-
-    ?SubClass rdfs:subClassOf ?Class .
   }
 
   #exclude nested submodel elements
