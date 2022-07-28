@@ -9,7 +9,7 @@ CONSTRUCT {
         aaskey:value ?Property ;
       ] ;
     ] ;
-    prov:wasDerivedFrom ?Class ;
+    prov:wasDerivedFrom ?Class, ?Property ;
   .
 }
 WHERE {

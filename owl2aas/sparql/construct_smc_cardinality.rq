@@ -28,6 +28,7 @@ WHERE {
     ?Property a owl:ObjectProperty ;
       rdfs:domain/mas4ai:hasInterface [] .
   }
+  FILTER NOT EXISTS { ?Property rdfs:range/mas4ai:hasInterface [] }
 
   BIND(iri(concat( "http://mas4ai.eu/id/smc/template/", struuid() )) as ?SMC_iri)
 }
