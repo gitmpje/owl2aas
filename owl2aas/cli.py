@@ -23,9 +23,8 @@ def parse_cli_arguments() -> argparse.ArgumentParser:
     parser.add_argument('-c', '--aas_class', help="list of classes for which to generate an AAS", nargs='+', default=None)
     parser.add_argument('-v', '--verbose', help="Print detailed information for each step in the process.", action="store_true")
     parser.add_argument('-l', '--logfile', help="Log file to be created in addition to output to stdout", default=None)
-    # group = parser.add_mutually_exclusive_group(required=True)
-    # group.add_argument('--json', help="Use AAS json format when checking or creating files", action='store_true')
-    # group.add_argument('--xml', help="Use AAS xml format when checking or creating files", action='store_true')
+    parser.add_argument('-d', '--debug', help="Output intermediary results for debugging.", action="store_true")
+
     return parser
 
 
@@ -42,7 +41,7 @@ def main():
         for c in aas_classes:
             g_input.add((URIRef(c), URIRef("http://example.org/MAS4AI_GenericModel#hasInterface"), BNode()))
 
-    g_aas = construct_aas(g_input)
+    g_aas = construct_aas(g_input, args.debug)
 
     if args.output:
         output_file = args.output

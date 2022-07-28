@@ -1,7 +1,14 @@
+import os
+
+from xmlrpc.client import Boolean
 from rdflib import BNode, ConjunctiveGraph, Dataset, Graph, URIRef
 from pathlib import Path
 
 from owl2aas.helpers import add_prefixes, infer_properties
+
+# Directory for storing logs and debug files
+LOGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
+
 
 def initialize_dataset(g_in: Graph):
 
@@ -23,7 +30,7 @@ def initialize_dataset(g_in: Graph):
     return dataset, g_owl
 
 
-def construct_aas(g_in: Graph):
+def construct_aas(g_in: Graph, debug: Boolean):
 
     # Initialize graphs and dataset
     dataset, g_owl = initialize_dataset(g_in)
@@ -43,6 +50,9 @@ def construct_aas(g_in: Graph):
 
     infer_properties(g_owl)
 
+    if debug:
+        g_owl.serialize(os.path.join(LOGS_DIR, "g_owl.ttl"))
+        print(f"Stored enriched ontology to {os.path.join(LOGS_DIR, 'g_owl.ttl')}")
 
     # Load SPARQL files into memory
     sparql_files = list(Path("owl2aas/sparql/").rglob("*.r[qu]"))
@@ -55,23 +65,36 @@ def construct_aas(g_in: Graph):
     # TODO: use SPARQL INSERT?
     g_out.parse(data=g_owl.query(construct_property).graph.serialize())
 
+    add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_reference_element).graph.serialize())
 
+    add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_smc_non_aas_class).graph.serialize())
+    add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_smc_cardinality).graph.serialize())
+    add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_smc_cardinality_object_prop).graph.serialize())
+    add_prefixes(dataset)
     g_conj.update(insert_smc_value)
 
+    add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_submodel).graph.serialize())
+    add_prefixes(dataset)
     g_conj.update(insert_sm_submodelelements)
 
+    add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_asset_administration_shell).graph.serialize())
+    add_prefixes(dataset)
     g_conj.update(insert_aas_submodels)
+    add_prefixes(dataset)
     g_conj.update(insert_refe_value)
 
+    add_prefixes(dataset)
     g_conj.update(insert_aas_environment)
 
+    add_prefixes(dataset)
     g_conj.update(insert_haskind)
+    add_prefixes(dataset)
     g_conj.update(insert_referable_attributes)
 
     return g_out

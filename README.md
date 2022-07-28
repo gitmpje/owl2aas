@@ -37,7 +37,9 @@ pip install -r requirements.txt
 ### Example
 
 Example usage `python -m owl2aas.cli 'owl2aas/examples/mas4aiDEMO.ttl' -c 'http://www.tno.nl/mas4aiDEMO#RoboticArm'`
-Generates `mas4aiDEMO_template.aas.ttl` file with the basic AAS template.
+Generates `mas4aiDEMO_template.aas.ttl` file with the basic AAS template for a 'Robotic Arm'.
+If we also need an AAS Template for a 'Tool', we can use `python -m owl2aas.cli 'owl2aas/examples/mas4aiDEMO.ttl' -c 'http://www.tno.nl/mas4aiDEMO#RoboticArm' 'http://www.tno.nl/mas4aiDEMO#Tool'`.
+
 
 ## Contributing
 
