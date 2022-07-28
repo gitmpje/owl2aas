@@ -11,6 +11,7 @@ CONSTRUCT {
       ] ;
     ] ;
     prov:wasDerivedFrom ?Property ;
+    mas4ai:constructedByQuery "construct_property.rq" ;
   .
 }
 WHERE {

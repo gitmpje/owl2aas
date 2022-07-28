@@ -10,6 +10,7 @@ CONSTRUCT {
       ] ;
     ] ;
     prov:wasDerivedFrom ?Class ;
+    mas4ai:constructedByQuery "construct_smc_non-aas-class.rq" ;
   .
 }
 WHERE {

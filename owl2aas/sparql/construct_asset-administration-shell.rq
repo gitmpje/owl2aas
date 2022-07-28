@@ -10,6 +10,7 @@ CONSTRUCT {
       ] ;
     ] ;
     prov:wasDerivedFrom ?AASClass ;
+    mas4ai:constructedByQuery "construct_asset-administration-shell.rq" ;
   .
 }
 WHERE {

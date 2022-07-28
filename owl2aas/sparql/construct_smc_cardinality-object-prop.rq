@@ -10,6 +10,7 @@ CONSTRUCT {
       ] ;
     ] ;
     prov:wasDerivedFrom ?Property, ?Class ;
+    mas4ai:constructedByQuery "construct_smc_cardinality-object-prop.rq" ;
   .
 }
 WHERE {
