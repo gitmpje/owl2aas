@@ -13,7 +13,7 @@ CONSTRUCT {
   .
 }
 WHERE {
-  { ?Class a owl:Class } UNION { ?Class a rdfs:Class }
+  ?Class a owl:Class .
 
   FILTER EXISTS { [] rdfs:domain ?Class }
   FILTER EXISTS { [] rdfs:range ?Class }

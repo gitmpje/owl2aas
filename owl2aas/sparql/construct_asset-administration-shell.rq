@@ -13,11 +13,7 @@ CONSTRUCT {
   .
 }
 WHERE {
-  {
-    ?AASClass a owl:Class .
-  } UNION {
-    ?AASClass a rdfs:Class .
-  }
+  ?AASClass a owl:Class .
 
   ?AASClass mas4ai:hasInterface [] .
 

@@ -13,7 +13,7 @@ CONSTRUCT {
   .
 }
 WHERE {
-  { ?Class a owl:Class } UNION { ?Class a rdfs:Class }
+  ?Class a owl:Class .
 
   {
     ?Property rdfs:range ?Class .

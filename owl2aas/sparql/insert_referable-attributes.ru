@@ -13,7 +13,7 @@ WHERE {
     ?Object a/rdfs:subClassOf* aas:Referable ;
     OPTIONAL {
       ?Object prov:wasDerivedFrom ?Class .
-      { ?Class a owl:Class } UNION { ?Class a rdfs:Class }
+      ?Class a owl:Class .
     }
     OPTIONAL {
       ?Object prov:wasDerivedFrom ?Property .

@@ -44,7 +44,7 @@ def construct_aas(g_in: Graph, g_in_path: str, debug: Boolean):
     for file in imports:
         # First check if file is in same folder as input graph
         try:
-            local_file = os.path.join(os.path.split(g_in_path)[0], file.toPython().split('/')[-1])
+            local_file = os.path.join(os.path.split(g_in_path)[0], file.toPython().strip('#/').split('/')[-1])
             g_owl.parse(local_file)
             print('imported: ', local_file)
         except FileNotFoundError:
