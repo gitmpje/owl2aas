@@ -1,4 +1,5 @@
 import argparse
+import os
 
 from owl2aas.construct_aas import construct_aas
 
@@ -41,7 +42,7 @@ def main():
         for c in aas_classes:
             g_input.add((URIRef(c), URIRef("http://example.org/MAS4AI_GenericModel#hasInterface"), BNode()))
 
-    g_aas = construct_aas(g_input, args.debug)
+    g_aas = construct_aas(g_input, os.path.normpath(args.input_file), args.debug)
 
     if args.output:
         output_file = args.output

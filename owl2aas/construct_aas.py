@@ -30,7 +30,7 @@ def initialize_dataset(g_in: Graph):
     return dataset, g_owl
 
 
-def construct_aas(g_in: Graph, debug: Boolean):
+def construct_aas(g_in: Graph, g_in_path: str, debug: Boolean):
 
     # Initialize graphs and dataset
     dataset, g_owl = initialize_dataset(g_in)
@@ -42,11 +42,17 @@ def construct_aas(g_in: Graph, debug: Boolean):
     # Enrich input graph (consider relocating to separate function)
     imports = [o for o in g_owl.objects(predicate=URIRef("http://www.w3.org/2002/07/owl#imports"))]
     for file in imports:
+        # First check if file is in same folder as input graph
         try:
-            g_owl.parse(file.toPython())
-            print('imported: ', file.toPython())
-        except:
-            print('Cannot import ', file.toPython())
+            local_file = os.path.join(os.path.split(g_in_path)[0], file.toPython().split('/')[-1])
+            g_owl.parse(local_file)
+            print('imported: ', local_file)
+        except FileNotFoundError:
+            try:
+                g_owl.parse(file.toPython())
+                print('imported: ', file.toPython())
+            except:
+                print('Cannot import ', file.toPython())
 
     infer_properties(g_owl)
 
