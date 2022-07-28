@@ -23,18 +23,26 @@ WHERE {
 
   ?Object prov:wasDerivedFrom ?Resource .
   OPTIONAL { ?Resource rdfs:label ?label }
+  OPTIONAL { ?Resource owl:maxCardinality ?maxCardinality }
   OPTIONAL {
     ?Resource rdfs:label ?label_en .
     FILTER(lang(?label_en)='en')
   }
-  OPTIONAL { ?Object aasrefer:idShort ?_idShort }
+
   BIND ( REPLACE(str(?Resource), ".+[//#]([a-z0-9_]+)$", "$1") as ?noLabel)
-  BIND ( REPLACE(COALESCE(?_idShort, ?label_en, ?label, ?noLabel), "[-//(), ]", "_") AS ?idShort )
+  BIND ( REPLACE(COALESCE(?_idShort, ?label_en, ?label, ?noLabel), "[-//(), ]", "_") AS ?_idShort )
+  # Plural idShort on SMC for cardinality>1 properties
+  BIND (
+    IF( EXISTS{?Object a aas:SubmodelElementCollection} && (!BOUND(?maxCardinality) || (?maxCardinality > 1)),
+      CONCAT(?_idShort, "s"),
+      ?_idShort )
+    AS ?idShort
+  )
 
   OPTIONAL {
     ?Resource rdfs:comment ?comment .
-    OPTIONAL { ?Object aasrefer:description ?_description }
-    BIND ( COALESCE(?_description, ?comment) AS ?description )
+    # If comment has no language tag, add default "en" tag
+    BIND ( IF(langMatches( lang(?comment), "*" ), ?comment, STRLANG(?comment, "en")) AS ?description )
   }
 
   OPTIONAL {
