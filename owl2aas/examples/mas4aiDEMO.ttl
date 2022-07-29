@@ -8,10 +8,12 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
 
 <http://www.tno.nl/mas4aiDEMO>
   a owl:Ontology ;
   # owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  # owl:imports <http://www.w3.org/ns/sosa/> ;
   owl:versionInfo "Created with TopBraid Composer" ;
 .
 mas4aiDEMO:ControlledBy
@@ -66,6 +68,12 @@ mas4aiDEMO:Tool
   rdfs:label "Tool" ;
   rdfs:subClassOf mas4aiDEMO:ManufacturingResource ;
   skos:prefLabel "Tool" ;
+.
+mas4aiDEMO:Position
+  a owl:Class ;
+  rdfs:comment "Position of an object"@en ;
+  rdfs:label "Position" ;
+  skos:prefLabel "Object Position" ;
 .
 mas4aiDEMO:dimensionProperties
   a rdf:Property ;
@@ -144,6 +152,15 @@ mas4aiDEMO:hasWidth
   skos:prefLabel "Has width" ;
   owl:maxCardinality 1 ;
 .
+mas4aiDEMO:rotation
+  a owl:DatatypeProperty ;
+  rdfs:comment "The rotation in degrees"@en ;
+  rdfs:domain mas4aiDEMO:Position ;
+  rdfs:label "Rotation" ;
+  rdfs:range xsd:integer ;
+  skos:prefLabel "Rotation" ;
+  owl:maxCardinality 1 ;
+.
 mas4aiDEMO:usesTool
   a owl:ObjectProperty ;
   rdfs:comment "Relates a robotic arm to the tool it is currently equiped with"@en ;
@@ -151,6 +168,15 @@ mas4aiDEMO:usesTool
   rdfs:label "Uses tool" ;
   rdfs:range mas4aiDEMO:Tool ;
   skos:prefLabel "Uses tool" ;
+.
+mas4aiDEMO:hasPosition
+  a owl:ObjectProperty ;
+  rdfs:comment "Relates an object to a description of the position"@en ;
+  rdfs:domain mas4aiDEMO:Joint  ;
+  rdfs:label "Has position" ;
+  rdfs:range mas4aiDEMO:Position ;
+  skos:prefLabel "Has position" ;
+  owl:maxCardinality 1 ;
 .
 
 

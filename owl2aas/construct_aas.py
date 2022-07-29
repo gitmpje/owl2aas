@@ -4,7 +4,7 @@ from xmlrpc.client import Boolean
 from rdflib import BNode, ConjunctiveGraph, Dataset, Graph, URIRef
 from pathlib import Path
 
-from owl2aas.helpers import add_prefixes, infer_properties
+from owl2aas.helpers import add_prefixes, infer_properties, drop_inverse_properties
 
 # Directory for storing logs and debug files
 LOGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
@@ -54,6 +54,7 @@ def construct_aas(g_in: Graph, g_in_path: str, debug: Boolean):
             except:
                 print('Cannot import ', file.toPython())
 
+    drop_inverse_properties(g_owl)
     infer_properties(g_owl)
 
     if debug:
@@ -77,7 +78,7 @@ def construct_aas(g_in: Graph, g_in_path: str, debug: Boolean):
     add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_smc_non_aas_class).graph.serialize())
     add_prefixes(dataset)
-    g_out.parse(data=g_owl.query(construct_smc_cardinality).graph.serialize())
+    g_out.parse(data=g_owl.query(construct_smc_cardinality_datatype_prop).graph.serialize())
     add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_smc_cardinality_object_prop).graph.serialize())
     add_prefixes(dataset)

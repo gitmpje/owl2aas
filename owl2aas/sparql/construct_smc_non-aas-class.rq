@@ -9,15 +9,15 @@ CONSTRUCT {
         aaskey:value ?Class ;
       ] ;
     ] ;
-    prov:wasDerivedFrom ?Class ;
+    prov:wasDerivedFrom ?Class, ?Property ;
     mas4ai:constructedByQuery "construct_smc_non-aas-class.rq" ;
   .
 }
 WHERE {
   ?Class a owl:Class .
+  ?Property rdfs:range ?Class .
 
   FILTER EXISTS { [] rdfs:domain ?Class }
-  FILTER EXISTS { [] rdfs:range ?Class }
   FILTER NOT EXISTS { ?Class rdfs:subClassOf*/mas4ai:hasInterface [] }
   FILTER NOT EXISTS {
     #exclude classes 'directly related to' the 'main' MAS4AI class

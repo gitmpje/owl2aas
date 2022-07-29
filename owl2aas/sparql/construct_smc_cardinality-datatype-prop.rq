@@ -14,22 +14,14 @@ CONSTRUCT {
   .
 }
 WHERE {
-  VALUES ?PropertyType {owl:ObjectProperty owl:DatatypeProperty}
   {
-    ?Property a ?PropertyType ;
+    ?Property a owl:DataTypeProperty ;
       owl:maxCardinality ?maxCardinality .
     FILTER( ?maxCardinality > 1 )
   } UNION {
-    ?Property a ?PropertyType .
+    ?Property a owl:DataTypeProperty .
     FILTER NOT EXISTS { ?Property owl:maxCardinality [] } #if owl:maxCardinality>1 or not defined then embed the property in an ElementCollection
   }
-
-  FILTER NOT EXISTS {
-    #exclude object properties 'directly related to' a 'main' MAS4AI class
-    ?Property a owl:ObjectProperty ;
-      rdfs:domain/mas4ai:hasInterface [] .
-  }
-  FILTER NOT EXISTS { ?Property rdfs:range/mas4ai:hasInterface [] }
 
   BIND(iri(concat( "http://mas4ai.eu/id/smc/template/", struuid() )) as ?SMC_iri)
 }
