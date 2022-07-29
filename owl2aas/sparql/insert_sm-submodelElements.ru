@@ -13,34 +13,18 @@ WHERE {
 
     ?SubmodelElement prov:wasDerivedFrom ?Property .
 
-    FILTER NOT EXISTS { ?Submodel prov:wasDerivedFrom/rdfs:range/mas4ai:hasInterface [] }
-  } UNION {
-    ?Submodel a aas:Submodel ;
-      prov:wasDerivedFrom ?Property .
-  
-    ?SubmodelElement a aas:ReferenceElement ;
-      prov:wasDerivedFrom ?Property .
-  } UNION {
-    ?Submodel a aas:Submodel ;
-      prov:wasDerivedFrom ?Property .
-
-    ?SubmodelElement a aas:SubmodelElementCollection ;
-      prov:wasDerivedFrom ?Property .
-
-    FILTER NOT EXISTS { ?Property owl:maxCardinality 1 }
-  } UNION {
-    ?Submodel a aas:Submodel ;
-      prov:wasDerivedFrom ?DomainClass .
-
-    ?SubmodelElement a aas:SubmodelElementCollection ;
-      prov:wasDerivedFrom ?RangeClass .
-
-    FILTER EXISTS {
-      ?Property a owl:ObjectProperty ;
-        rdfs:domain ?DomainClass ;
-        rdfs:range ?RangeClass .
+    MINUS {
+      ?Submodel prov:wasDerivedFrom/a owl:ObjectProperty ;
+        prov:wasDerivedFrom/mas4ai:hasInterface [] .
     }
-    FILTER NOT EXISTS { ?DomainClass mas4ai:hasInterface [] }
+  } UNION {
+    VALUES ?SubmodelElementType {aas:ReferenceElement aas:SubmodelElementCollection}
+
+    ?Submodel a aas:Submodel ;
+      prov:wasDerivedFrom ?Resource .
+
+    ?SubmodelElement a ?SubmodelElementType ;
+      prov:wasDerivedFrom ?Resource .
   }
 
   # Exclude nested submodel elements
