@@ -43,10 +43,15 @@ WHERE {
     FILTER NOT EXISTS { ?DomainClass mas4ai:hasInterface [] }
   }
 
-  #exclude nested submodel elements
-  FILTER NOT EXISTS {
+  # Exclude nested submodel elements
+  MINUS {
     [] a aas:SubmodelElementCollection ;
-      prov:wasDerivedFrom ?Class ;
       aassmc:value ?SubmodelElement .
+
+    # Only if they are not linked to a 'main' AAS class
+    FILTER NOT EXISTS {
+      ?SubmodelElement prov:wasDerivedFrom/a owl:Class ;
+        prov:wasDerivedFrom/rdfs:domain/mas4ai:hasInterface [] .
+    }
   }
 }
