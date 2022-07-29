@@ -6,10 +6,10 @@ CONSTRUCT {
       aasref:keys [
         a aas:Key ;
         aaskey:idType aaskeyt:IRI ;
-        aaskey:value ?Class ;
+        aaskey:value ?Property ;
       ] ;
     ] ;
-    prov:wasDerivedFrom ?Property, ?Class ;
+    prov:wasDerivedFrom ?Property ;
     mas4ai:constructedByQuery "construct_smc_cardinality-object-prop.rq" ;
   .
 }
@@ -23,13 +23,16 @@ WHERE {
     FILTER NOT EXISTS { ?Property owl:maxCardinality [] } #if owl:maxCardinality>1 or not defined then embed the property in an ElementCollection
   }
 
-  ?Property rdfs:range ?Class .
-  FILTER NOT EXISTS { [] rdfs:subClassOf ?Class }
-  FILTER NOT EXISTS { ?Property rdfs:range/mas4ai:hasInterface [] }
-  FILTER EXISTS {
-    #only include classes 'directly related to' the 'main' MAS4AI class
-    ?Property a owl:ObjectProperty ;
-      rdfs:domain/mas4ai:hasInterface [] .
+  # FILTER NOT EXISTS { [] rdfs:subClassOf ?Class }
+  FILTER NOT EXISTS { ?Property rdfs:range/mas4ai:hasInterface [] } #exclude reference element properties
+
+  # Only include properties that do not only have domain the 'main' MAS4AI class
+  { SELECT DISTINCT ?Property {
+      ?Property rdfs:domain ?_Class .
+      FILTER NOT EXISTS { ?_Class rdfs:subClassOf*/mas4ai:hasInterface [] }
+    }
+    GROUP BY ?Property
+    HAVING (COUNT(?_Class) >= 1)
   }
 
   BIND(iri(concat( "http://mas4ai.eu/id/smc/template/", struuid() )) as ?SMC_iri)
