@@ -9,21 +9,21 @@ INSERT {
 }
 WHERE {
   # Prefer attributes from owl:Class
-  { SELECT ?Object (if(bound(?Class), ?Class, ?Property) as ?Resource) {
+  { SELECT ?Object (if(bound(?Class), ?Class, ?_Property) as ?Resource) (IF(BOUND(?_Property), ?_Property, BNODE()) AS ?Property) ?maxCardinality {
     ?Object a/rdfs:subClassOf* aas:Referable ;
     OPTIONAL {
       ?Object prov:wasDerivedFrom ?Class .
       ?Class a owl:Class .
     }
     OPTIONAL {
-      ?Object prov:wasDerivedFrom ?Property .
-      { ?Property a owl:DatatypeProperty } UNION { ?Property a owl:ObjectProperty }
+      ?Object prov:wasDerivedFrom ?_Property .
+      { ?_Property a owl:DatatypeProperty } UNION { ?_Property a owl:ObjectProperty }
+      OPTIONAL { ?_Property owl:maxCardinality ?maxCardinality }
     }
   } }
 
   ?Object prov:wasDerivedFrom ?Resource .
   OPTIONAL { ?Resource rdfs:label ?label }
-  OPTIONAL { ?Resource owl:maxCardinality ?maxCardinality }
   OPTIONAL {
     ?Resource rdfs:label ?label_en .
     FILTER(lang(?label_en)='en')
@@ -33,7 +33,8 @@ WHERE {
   BIND ( REPLACE(COALESCE(?_idShort, ?label_en, ?label, ?noLabel), "[-//(), ]", "_") AS ?_idShort )
   # Plural idShort on SMC for cardinality>1 properties
   BIND (
-    IF( EXISTS{?Object a aas:SubmodelElementCollection} && (!BOUND(?maxCardinality) || (?maxCardinality > 1)),
+    IF( EXISTS{?Object (aassm:submodelElements|aassmc:value)/prov:wasDerivedFrom ?Property} &&
+      (!BOUND(?maxCardinality) || (?maxCardinality > 1)),
       CONCAT(?_idShort, "s"),
       ?_idShort )
     AS ?idShort
