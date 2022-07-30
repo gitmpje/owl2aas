@@ -142,6 +142,15 @@ mas4aiDEMO:hasWeight
   skos:prefLabel "Has weight" ;
   owl:maxCardinality 1 ;
 .
+mas4aiDEMO:resourceName
+  a owl:DatatypeProperty ;
+  rdfs:comment "The name of the resource"@en ;
+  rdfs:domain mas4aiDEMO:ManufacturingResource ;
+  rdfs:label "Resource name" ;
+  rdfs:range rdf:langString ;
+  skos:prefLabel "Resource name" ;
+  owl:maxCardinality 1 ;
+.
 mas4aiDEMO:hasWidth
   a owl:DatatypeProperty ;
   rdfs:comment "The width of the robotic arm, expressed in cm"@en ;

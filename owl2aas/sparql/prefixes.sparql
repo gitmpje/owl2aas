@@ -8,6 +8,7 @@ PREFIX aassm:   <https://admin-shell.io/aas/3/0/RC01/Submodel/>
 PREFIX aassmc:  <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection/>
 PREFIX aasrefer: <https://admin-shell.io/aas/3/0/RC01/Referable/>
 PREFIX aasprop: <https://admin-shell.io/aas/3/0/RC01/Property/>
+PREFIX aaslprop: <https://admin-shell.io/aas/3/0/RC01/MultiLanguageProperty/>
 PREFIX aasrefe: <https://admin-shell.io/aas/3/0/RC01/ReferenceElement/>
 PREFIX aasref:  <https://admin-shell.io/aas/3/0/RC01/Reference/>
 PREFIX aaskey:  <https://admin-shell.io/aas/3/0/RC01/Key/>

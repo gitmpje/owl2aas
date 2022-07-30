@@ -1,7 +1,6 @@
 CONSTRUCT {
   # Property
-  ?Property_iri a aas:Property ;
-    aasprop:valueType ?dataType ;
+  ?Property_iri a aas:MultiLanguageProperty ;
     aassem:semanticId [
       a aas:Reference ;
       aasref:keys [
@@ -11,13 +10,12 @@ CONSTRUCT {
       ] ;
     ] ;
     prov:wasDerivedFrom ?Property ;
-    mas4ai:constructedByQuery "construct_property.rq" ;
+    mas4ai:constructedByQuery "construct_multi-lang-property.rq" ;
   .
 }
 WHERE {
   ?Property a owl:DatatypeProperty ; #filter out reference properties
-    rdfs:range ?dataType .
+    rdfs:range rdf:langString .
 
-  FILTER(?dataType != rdf:langString)
   BIND(iri(concat( "http://mas4ai.eu/id/property/template/", struuid() )) as ?Property_iri)
 }

@@ -73,6 +73,9 @@ def construct_aas(g_in: Graph, g_in_path: str, debug: Boolean):
     g_out.parse(data=g_owl.query(construct_property).graph.serialize())
 
     add_prefixes(dataset)
+    g_out.parse(data=g_owl.query(construct_multi_lang_property).graph.serialize())
+
+    add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_reference_element).graph.serialize())
 
     add_prefixes(dataset)
