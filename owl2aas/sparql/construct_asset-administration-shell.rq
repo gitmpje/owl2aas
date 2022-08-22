@@ -1,14 +1,6 @@
 CONSTRUCT {
   # Asset Administration Shell (AAS)
   ?AAS_iri a aas:AssetAdministrationShell ;
-    aassem:semanticId [
-      a aas:Reference ;
-      aasref:keys [
-        a aas:Key ;
-        aaskey:idType aaskeyt:IRI ;
-        aaskey:value ?AASClass ;
-      ] ;
-    ] ;
     prov:wasDerivedFrom ?AASClass ;
     mas4ai:constructedByQuery "construct_asset-administration-shell.rq" ;
   .

@@ -25,10 +25,6 @@
         <http://mas4ai.eu/id/sm/template/6a0da9a3-1b05-4e48-93b9-2d4fe5e22d3c>,
         <http://mas4ai.eu/id/sm/template/ac2edf6f-697e-4a59-a101-f33b52352a5b>,
         <http://mas4ai.eu/id/sm/template/dec529b9-cdba-4ecb-b59a-46de718b04ea> ;
-    aassem:semanticId [ a aas:Reference ;
-            aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:IRI ;
-                    aaskey:value mas4aiDEMO:RoboticArm ] ] ;
     aasrefer:description "A robot arm which can be used for a variety of different manufacturing tasks depending on the equiped tool"@en ;
     aasrefer:displayName "Robotic Arm"@en ;
     aasrefer:idShort "Robotic_Arm" .
@@ -38,10 +34,6 @@
     mas4ai:constructedByQuery "construct_asset-administration-shell.rq" ;
     prov:wasDerivedFrom mas4aiDEMO:Tool ;
     aasaas:submodels <http://mas4ai.eu/id/sm/template/e0b56db0-2d82-4796-887a-8dd8f54f1b90> ;
-    aassem:semanticId [ a aas:Reference ;
-            aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:IRI ;
-                    aaskey:value mas4aiDEMO:Tool ] ] ;
     aasrefer:description "A tool which may be used by a robotic arm to have it fullfill a variety of functions"@en ;
     aasrefer:displayName "Tool" ;
     aasrefer:idShort "Tool" .
