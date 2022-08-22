@@ -16,7 +16,7 @@
   # owl:imports <http://www.w3.org/ns/sosa/> ;
   owl:versionInfo "Created with TopBraid Composer" ;
 .
-mas4aiDEMO:ControlledBy
+mas4aiDEMO:controlledBy
   a owl:ObjectProperty ;
   rdfs:comment "Relating a robotic arm to a software instruction set controlling a given arm"@en ;
   rdfs:domain mas4aiDEMO:RoboticArm ;

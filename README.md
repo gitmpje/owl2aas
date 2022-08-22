@@ -1,13 +1,13 @@
 # OWL2AAS
 
-The PyI40AAS project aims to provide a tool to convert an OWL2 ontology to a basic Asset Administration Shell (AAS) Template for Industry 4.0 Systems,
+The PyI40AAS project aims to provide a tool to convert an [RDF based OWL 2](https://www.w3.org/TR/2012/REC-owl2-rdf-based-semantics-20121211/) ontology to a basic Asset Administration Shell (AAS) Template for Industry 4.0 Systems,
 compliant with the meta model specification provided in
-[the document “Details of the Asset Administration Shell” (v2.0.1)](https://www.plattform-i40.de/PI40/Redaktion/DE/Downloads/Publikation/Details-of-the-Asset-Administration-Shell-Part1.html).
+[the document “Details of the Asset Administration Shell” (v3.0RC02)](https://https://www.plattform-i40.de/IP/Redaktion/EN/Downloads/Publikation/Details_of_the_Asset_Administration_Shell_Part1_V3.html).
 
 
 ## Features
 
-* Conversion of OWL2 ontology to a basic AAS, both using RDF syntax.
+* Conversion of OWL 2 ontology to a basic AAS, both using RDF syntax.
 
 
 <!-- ### Project Structure -->
@@ -43,7 +43,7 @@ If we also need an AAS Template for a 'Tool', we can use `python -m owl2aas.cli 
 
 ## Contributing
 
-If you plan contributing code to this repository, please get in touch with us via e-mail first: mark.van.der.pas@semaku.ccom
+If you would like to contribute, please get in touch with us: mark.van.der.pas@semaku.com
 
 
 <!-- ### Codestyle and Testing
