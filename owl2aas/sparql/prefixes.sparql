@@ -22,4 +22,3 @@ PREFIX aassm:   <https://admin-shell.io/aas/3/0/RC01/Submodel/>
 PREFIX aassmc:  <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection/>
 PREFIX aassem:  <https://admin-shell.io/aas/3/0/RC01/HasSemantics/>
 PREFIX assetinf: <https://admin-shell.io/aas/3/0/RC02/AssetInformation/>
-PREFIX assetkind: <https://admin-shell.io/aas/3/0/RC01/HasKind/>
