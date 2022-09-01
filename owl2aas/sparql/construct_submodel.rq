@@ -6,7 +6,7 @@ CONSTRUCT {
       aasref:keys [
         a aas:Key ;
         aaskey:idType aaskeyt:IRI ;
-        aaskey:value ?Property ;
+        aaskey:value ?SemanticId ;
       ] ;
     ] ;
     prov:wasDerivedFrom ?Class, ?Property ;
@@ -25,4 +25,5 @@ WHERE {
   }
 
   BIND(iri(concat( "http://mas4ai.eu/id/sm/template/", struuid() )) as ?SM_iri)
+  BIND(COALESCE(?Property, ?Class) AS ?SemanticId)
 }
