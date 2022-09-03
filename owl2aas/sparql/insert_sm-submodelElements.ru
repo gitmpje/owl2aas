@@ -29,13 +29,13 @@ WHERE {
 
   # Exclude nested submodel elements
   MINUS {
+    ?Submodel a aas:Submodel .
     [] a aas:SubmodelElementCollection ;
       aassmc:value ?SubmodelElement .
 
-    # Only if they are not linked to a 'main' AAS class
+    # Only if the submodel is not derived from the 'main' AAS class
     FILTER NOT EXISTS {
-      ?SubmodelElement prov:wasDerivedFrom/a owl:Class ;
-        prov:wasDerivedFrom/rdfs:domain/mas4ai:hasInterface [] .
+      ?Submodel prov:wasDerivedFrom/mas4ai:hasInterface [] .
     }
   }
 }
