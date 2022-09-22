@@ -22,9 +22,9 @@ WHERE {
 
   # Exclude classes directly connected to a 'main' AAS class via a cardinality one property
   MINUS {
-    [] rdfs:domain/mas4ai:hasInterface [] ;
-      rdfs:range ?Class ;
-      ^owl:onProperty/owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger .
+    [] a owl:FunctionalProperty ;
+      rdfs:domain/mas4ai:hasInterface [] ;
+      rdfs:range ?Class .
   }
 
   BIND(iri(concat( "http://mas4ai.eu/id/smc/template/", struuid() )) as ?SMC_iri)

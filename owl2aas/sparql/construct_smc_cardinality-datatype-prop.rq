@@ -14,21 +14,8 @@ CONSTRUCT {
   .
 }
 WHERE {
-  {
-    ?Property a owl:DataTypeProperty .
-    [] a owl:Restriction ;
-      owl:onProperty ?Property ;
-      owl:maxQualifiedCardinality ?maxCardinality .
-    FILTER( xsd:int(?maxCardinality) > 1 )
-  } UNION {
-    ?Property a owl:DataTypeProperty .
-    # If owl:maxCardinality>1 or not defined then embed the property in an ElementCollection
-    FILTER NOT EXISTS { 
-      [] a owl:Restriction ;
-        owl:onProperty ?Property ;
-        owl:maxQualifiedCardinality ?maxCardinality .
-    }
-  }
+  ?Property a owl:DataTypeProperty .
+  FILTER NOT EXISTS { ?Property a owl:FunctionalProperty } # Functional properties have a maximum cardinality of one
 
   BIND(iri(concat( "http://mas4ai.eu/id/smc/template/", struuid() )) as ?SMC_iri)
 }
