@@ -19,11 +19,15 @@
 mas4aiDEMO:controlledBy
   a owl:ObjectProperty ;
   rdfs:comment "Relating a robotic arm to a software instruction set controlling a given arm"@en ;
-  rdfs:domain mas4aiDEMO:RoboticArm ;
+  rdfs:domain mas4aiDEMO:RoboticArm ,
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mas4aiDEMO:controlledBy ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onClass mas4aiDEMO:Software
+    ] ;
   rdfs:label "Controlled by" ;
   rdfs:range mas4aiDEMO:Software ;
   skos:prefLabel "Controlled by" ;
-  owl:maxCardinality 1 ;
 .
 mas4aiDEMO:Joint
   a owl:Class ;
@@ -35,11 +39,15 @@ mas4aiDEMO:Joint
 mas4aiDEMO:manualLocation
   a owl:DatatypeProperty ;
   rdfs:comment "The web location of the user manual associated with the used tool"@en ;
-  rdfs:domain mas4aiDEMO:Tool ;
+  rdfs:domain mas4aiDEMO:Tool ,
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mas4aiDEMO:manualLocation ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:anyURI
+    ] ;
   rdfs:label "Manual location" ;
   rdfs:range xsd:anyURI ;
   skos:prefLabel "Manual location" ;
-  owl:maxCardinality 1 ;
 .
 mas4aiDEMO:ManufacturingResource
   a owl:Class ;
@@ -81,22 +89,30 @@ mas4aiDEMO:dimensionProperties
 mas4aiDEMO:hasDepth
   a owl:DatatypeProperty ;
   rdfs:comment "The depth of the robotic arm in centimeters"@en ;
-  rdfs:domain mas4aiDEMO:RoboticArm ;
+  rdfs:domain mas4aiDEMO:RoboticArm ,
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mas4aiDEMO:hasDepth ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:integer
+    ] ;
   rdfs:label "Has depth" ;
   rdfs:range xsd:integer ;
   rdfs:subPropertyOf mas4aiDEMO:dimensionProperties ;
   skos:prefLabel "Has depth" ;
-  owl:maxCardinality 1 ;
 .
 mas4aiDEMO:hasHeight
   a owl:DatatypeProperty ;
   rdfs:comment "The height of the robotic arm, expressed in cm"@en ;
-  rdfs:domain mas4aiDEMO:RoboticArm ;
+  rdfs:domain mas4aiDEMO:RoboticArm ,
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mas4aiDEMO:hasHeight ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:integer
+    ] ;
   rdfs:label "Has height" ;
   rdfs:range xsd:integer ;
   rdfs:subPropertyOf mas4aiDEMO:dimensionProperties ;
   skos:prefLabel "Has height" ;
-  owl:maxCardinality 1 ;
 .
 mas4aiDEMO:hasJoint
   a owl:ObjectProperty ;
@@ -109,66 +125,94 @@ mas4aiDEMO:hasJoint
 mas4aiDEMO:hasMaxSpeed
   a owl:DatatypeProperty ;
   rdfs:comment "The maximum speed of rotation of a joint, expressed in degrees per second"@en ;
-  rdfs:domain mas4aiDEMO:Joint ;
+  rdfs:domain mas4aiDEMO:Joint ,
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mas4aiDEMO:hasMaxSpeed ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:decimal
+    ] ;
   rdfs:label "Has Maximum speed" ;
   rdfs:range xsd:decimal ;
   skos:prefLabel "Has maximum speed" ;
-  owl:maxCardinality 1 ;
 .
 mas4aiDEMO:hasRange
   a owl:DatatypeProperty ;
   rdfs:comment "The range over which a joint can articulate, expressed in the amount of degrees between the two limits of rotation"@en ;
-  rdfs:domain mas4aiDEMO:Joint ;
+  rdfs:domain mas4aiDEMO:Joint ,
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mas4aiDEMO:hasRange ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:decimal
+    ] ;
   rdfs:label "Has range" ;
   rdfs:range xsd:decimal ;
   skos:prefLabel "Has range" ;
-  owl:maxCardinality 1 ;
 .
 mas4aiDEMO:hasVersionNumber
   a owl:DatatypeProperty ;
   rdfs:comment "The version number of a piece of software"@en ;
-  rdfs:domain mas4aiDEMO:Software ;
+  rdfs:domain mas4aiDEMO:Software ,
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mas4aiDEMO:hasVersionNumber ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:integer
+    ] ;
   rdfs:label "Has version number" ;
   rdfs:range xsd:integer ;
   skos:prefLabel "Has version number" ;
-  owl:maxCardinality 1 ;
 .
 mas4aiDEMO:hasWeight
   a owl:DatatypeProperty ;
   rdfs:comment "The weight of a piece of manufacturing equipment, expressed in Kg"@en ;
-  rdfs:domain mas4aiDEMO:ManufacturingResource ;
+  rdfs:domain mas4aiDEMO:ManufacturingResource ,
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mas4aiDEMO:hasWeight ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:integer
+    ] ;
   rdfs:label "Has weight" ;
   rdfs:range xsd:integer ;
   skos:prefLabel "Has weight" ;
-  owl:maxCardinality 1 ;
 .
 mas4aiDEMO:resourceName
   a owl:DatatypeProperty ;
   rdfs:comment "The name of the resource"@en ;
-  rdfs:domain mas4aiDEMO:ManufacturingResource ;
+  rdfs:domain mas4aiDEMO:ManufacturingResource ,
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mas4aiDEMO:resourceName ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:langString
+    ] ;
   rdfs:label "Resource name" ;
   rdfs:range rdf:langString ;
   skos:prefLabel "Resource name" ;
-  owl:maxCardinality 1 ;
 .
 mas4aiDEMO:hasWidth
   a owl:DatatypeProperty ;
   rdfs:comment "The width of the robotic arm, expressed in cm"@en ;
-  rdfs:domain mas4aiDEMO:RoboticArm ;
+  rdfs:domain mas4aiDEMO:RoboticArm ,
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mas4aiDEMO:hasWidth ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:integer
+    ] ;
   rdfs:label "Has width" ;
   rdfs:range xsd:integer ;
   rdfs:subPropertyOf mas4aiDEMO:dimensionProperties ;
   skos:prefLabel "Has width" ;
-  owl:maxCardinality 1 ;
 .
 mas4aiDEMO:rotation
   a owl:DatatypeProperty ;
   rdfs:comment "The rotation in degrees"@en ;
-  rdfs:domain mas4aiDEMO:Position ;
+  rdfs:domain mas4aiDEMO:Position ,
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mas4aiDEMO:rotation ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onDataRange xsd:integer
+    ] ;
   rdfs:label "Rotation" ;
   rdfs:range xsd:integer ;
   skos:prefLabel "Rotation" ;
-  owl:maxCardinality 1 ;
 .
 mas4aiDEMO:usesTool
   a owl:ObjectProperty ;
@@ -181,11 +225,15 @@ mas4aiDEMO:usesTool
 mas4aiDEMO:hasPosition
   a owl:ObjectProperty ;
   rdfs:comment "Relates an object to a description of the position"@en ;
-  rdfs:domain mas4aiDEMO:Joint  ;
+  rdfs:domain mas4aiDEMO:Joint  ,
+    [ rdf:type owl:Restriction ;
+      owl:onProperty mas4aiDEMO:hasPosition ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onClass mas4aiDEMO:Position
+    ] ;
   rdfs:label "Has position" ;
   rdfs:range mas4aiDEMO:Position ;
   skos:prefLabel "Has position" ;
-  owl:maxCardinality 1 ;
 .
 
 

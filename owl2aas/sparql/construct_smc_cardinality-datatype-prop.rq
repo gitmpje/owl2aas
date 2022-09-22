@@ -15,12 +15,19 @@ CONSTRUCT {
 }
 WHERE {
   {
-    ?Property a owl:DataTypeProperty ;
-      owl:maxCardinality ?maxCardinality .
-    FILTER( ?maxCardinality > 1 )
+    ?Property a owl:DataTypeProperty .
+    [] a owl:Restriction ;
+      owl:onProperty ?Property ;
+      owl:maxQualifiedCardinality ?maxCardinality .
+    FILTER( xsd:int(?maxCardinality) > 1 )
   } UNION {
     ?Property a owl:DataTypeProperty .
-    FILTER NOT EXISTS { ?Property owl:maxCardinality [] } #if owl:maxCardinality>1 or not defined then embed the property in an ElementCollection
+    # If owl:maxCardinality>1 or not defined then embed the property in an ElementCollection
+    FILTER NOT EXISTS { 
+      [] a owl:Restriction ;
+        owl:onProperty ?Property ;
+        owl:maxQualifiedCardinality ?maxCardinality .
+    }
   }
 
   BIND(iri(concat( "http://mas4ai.eu/id/smc/template/", struuid() )) as ?SMC_iri)

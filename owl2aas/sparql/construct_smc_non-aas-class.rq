@@ -24,7 +24,7 @@ WHERE {
   MINUS {
     [] rdfs:domain/mas4ai:hasInterface [] ;
       rdfs:range ?Class ;
-      owl:maxCardinality 1 .
+      ^owl:onProperty/owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger .
   }
 
   BIND(iri(concat( "http://mas4ai.eu/id/smc/template/", struuid() )) as ?SMC_iri)
