@@ -6,8 +6,11 @@ from pathlib import Path
 
 from owl2aas.helpers import add_prefixes, infer_properties, drop_inverse_properties
 
+# Main directory
+MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Directory for storing logs and debug files
-LOGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
+LOGS_DIR = os.path.join(MAIN_DIR, "logs")
 
 
 def initialize_dataset(g_in: Graph):
@@ -21,7 +24,7 @@ def initialize_dataset(g_in: Graph):
 
     # Add AAS RDF ontology graph to dataset
     g_AAS_ont = dataset.graph(identifier=URIRef("https://admin-shell.io/aas/3/0/RC01/"))
-    g_AAS_ont.parse("https://raw.githubusercontent.com/admin-shell-io/aas-specs/master/schemas/rdf/rdf-ontology.ttl", format="text/turtle")
+    g_AAS_ont.parse(os.path.join(MAIN_DIR, "rdf-ontology_V3.0.4RC01.ttl"), format="text/turtle")
     # g_AAS_ont.parse("https://raw.githubusercontent.com/admin-shell-io/aas-specs/draft-V3RC02-schemas/schemas/rdf/rdf-ontology.ttl", format="text/turtle")
 
     # Add graph to store the AAS Template graph in
