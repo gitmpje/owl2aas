@@ -15,8 +15,6 @@ WHERE {
 
     ?Value a ?SubmodelElementType ;
       prov:wasDerivedFrom ?Property .
-
-    FILTER NOT EXISTS { ?Value prov:wasDerivedFrom/a owl:Class }
   } UNION {
     ?SMC a aas:SubmodelElementCollection ;
       prov:wasDerivedFrom ?Class .
@@ -30,10 +28,10 @@ WHERE {
     MINUS {
       ?Value prov:wasDerivedFrom/a owl:Class ;
         prov:wasDerivedFrom ?Property .
-      FILTER NOT EXISTS { ?Property owl:maxCardinality 1 }
+      FILTER NOT EXISTS { ?Property a owl:FunctionalProperty }
     }
   } UNION {
-    # Cardinality>1 properties
+    # Cardinality>1 (datatype) properties
     ?SMC a aas:SubmodelElementCollection ;
       prov:wasDerivedFrom ?Property .
     FILTER NOT EXISTS { ?SMC prov:wasDerivedFrom/a owl:Class }

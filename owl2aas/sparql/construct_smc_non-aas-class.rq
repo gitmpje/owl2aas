@@ -18,7 +18,7 @@ WHERE {
   ?Property rdfs:range ?Class .
 
   FILTER EXISTS { [] rdfs:domain ?Class }
-  FILTER NOT EXISTS { ?Class rdfs:subClassOf*/mas4ai:hasInterface [] }
+  FILTER NOT EXISTS { ?Property rdfs:range/mas4ai:hasInterface [] } #exclude reference element properties
 
   # Exclude classes directly connected to a 'main' AAS class via a cardinality one property
   MINUS {

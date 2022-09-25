@@ -8,22 +8,28 @@ INSERT {
   }
 }
 WHERE {
-  # Prefer attributes from owl:Class
-  { SELECT ?Object (if(bound(?Class), ?Class, ?_Property) as ?Resource) (IF(BOUND(?_Property), ?_Property, BNODE()) AS ?Property) ?maxCardinality {
-    ?Object a/rdfs:subClassOf* aas:Referable ;
-    OPTIONAL {
-      ?Object prov:wasDerivedFrom ?Class .
-      ?Class a owl:Class .
-    }
-    OPTIONAL {
-      ?Object prov:wasDerivedFrom ?_Property .
-      { ?_Property a owl:DatatypeProperty } UNION { ?_Property a owl:ObjectProperty }
-      OPTIONAL { ?_Property owl:maxCardinality ?maxCardinality }
-    }
+  # Join Property and Class label
+  { SELECT
+      ?Object
+      (CONCAT(?propertyLabel, "__", ?classLabel) as ?_idShort)
+      (IF(bound(?Class), ?Class, ?_Property) as ?Resource)
+      (IF(BOUND(?_Property), ?_Property, BNODE()) AS ?Property)
+    WHERE {
+        ?Object a/rdfs:subClassOf* aas:Referable ;
+        OPTIONAL {
+          ?Object prov:wasDerivedFrom ?Class .
+          ?Class a owl:Class ;
+            rdfs:label ?classLabel .
+        }
+        OPTIONAL {
+          ?Object prov:wasDerivedFrom ?_Property .
+          { ?_Property a owl:DatatypeProperty } UNION { ?_Property a owl:ObjectProperty }
+          ?_Property rdfs:label ?propertyLabel .
+        }
   } }
 
   ?Object prov:wasDerivedFrom ?Resource .
-  OPTIONAL { ?Resource rdfs:label ?label }
+  ?Resource rdfs:label ?label .
   OPTIONAL {
     ?Resource rdfs:label ?label_en .
     FILTER(lang(?label_en)='en')
@@ -34,7 +40,7 @@ WHERE {
   # Plural idShort on SMC for cardinality>1 properties
   BIND (
     IF( EXISTS{?Object (aassm:submodelElements|aassmc:value)/prov:wasDerivedFrom ?Property} &&
-      (!BOUND(?maxCardinality) || (?maxCardinality > 1)),
+      NOT EXISTS{ ?Property a owl:FunctionalPropery },
       CONCAT(?_idShort, "s"),
       ?_idShort )
     AS ?idShort

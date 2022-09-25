@@ -86,14 +86,17 @@ def construct_aas(g_in: Graph, g_in_path: str, debug: Boolean):
     add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_smc_cardinality_datatype_prop).graph.serialize())
     add_prefixes(dataset)
-    g_out.parse(data=g_owl.query(construct_smc_cardinality_object_prop).graph.serialize())
-    add_prefixes(dataset)
     g_conj.update(insert_smc_value)
+    add_prefixes(dataset)
+    g_out.update(delete_smc_no_values)
 
     add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_submodel).graph.serialize())
     add_prefixes(dataset)
     g_conj.update(insert_sm_submodelelements)
+
+    add_prefixes(dataset)
+    g_out.update(delete_loops) #TODO insert reference elements instead of delete
 
     add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_asset_administration_shell).graph.serialize())
