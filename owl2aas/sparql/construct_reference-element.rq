@@ -9,7 +9,7 @@ CONSTRUCT {
         aaskey:value ?ReferenceElement ;
       ] ;
     ] ;
-    prov:wasDerivedFrom ?ReferenceElement ;
+    prov:wasDerivedFrom ?Class, ?ReferenceElement ;
     mas4ai:constructedByQuery "construct_reference-element.rq" ;
   .
 }

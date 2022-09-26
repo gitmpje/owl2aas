@@ -25,8 +25,8 @@ WHERE {
       # Only if the submodel is derived from a cardinality >1 property
       FILTER NOT EXISTS { ?Submodel prov:wasDerivedFrom/a owl:FunctionalProperty }
 
-      # Only if the submodel is not derived from a AAS class
-      FILTER NOT EXISTS { ?Submodel prov:wasDerivedFrom /mas4ai:hasInterface [] }
+      # Only if the submodel is not derived from an AAS class
+      FILTER NOT EXISTS { ?Submodel prov:wasDerivedFrom/mas4ai:hasInterface [] }
     }
   } UNION {
     # Cardinality >1 (object) properties
@@ -43,5 +43,7 @@ WHERE {
 
     ?SubmodelElement a aas:ReferenceElement ;
       prov:wasDerivedFrom ?Property .
+
+    ?Property a owl:ObjectProperty .
   }
 }

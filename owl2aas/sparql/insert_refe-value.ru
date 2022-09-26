@@ -13,10 +13,9 @@ INSERT {
 }
 WHERE {
   ?ReferenceElement a aas:ReferenceElement ;
-    prov:wasDerivedFrom ?Property .
+    prov:wasDerivedFrom ?Class, ?Property .
 
-  ?Property a owl:ObjectProperty ;
-    rdfs:range ?Class .
+  ?Property rdfs:range ?Class .
 
   ?ReferenceAAS a aas:AssetAdministrationShell ;
     prov:wasDerivedFrom ?Class .

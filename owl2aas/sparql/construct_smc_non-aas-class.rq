@@ -20,9 +20,9 @@ WHERE {
   FILTER EXISTS { [] rdfs:domain ?Class }
   FILTER NOT EXISTS { ?Property rdfs:range/mas4ai:hasInterface [] } #exclude reference element properties
 
-  # Exclude classes directly connected to a 'main' AAS class via a cardinality one property
+  # Exclude property-class pairs directly connected to a 'main' AAS class via a cardinality one property
   MINUS {
-    [] a owl:FunctionalProperty ;
+    ?Property a owl:FunctionalProperty ;
       rdfs:domain/mas4ai:hasInterface [] ;
       rdfs:range ?Class .
   }
