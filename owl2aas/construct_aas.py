@@ -96,7 +96,9 @@ def construct_aas(g_in: Graph, g_in_path: str, debug: Boolean):
     g_conj.update(insert_sm_submodelelements)
 
     add_prefixes(dataset)
-    g_out.update(delete_loops) #TODO insert reference elements instead of delete
+    g_conj.update(convert_smc_to_reference_element)
+    add_prefixes(dataset)
+    g_out.update(delete_smc_loops) #TODO insert reference elements instead of delete
 
     add_prefixes(dataset)
     g_out.parse(data=g_owl.query(construct_asset_administration_shell).graph.serialize())
