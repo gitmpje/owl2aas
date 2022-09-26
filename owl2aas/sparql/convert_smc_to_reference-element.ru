@@ -1,6 +1,11 @@
+DELETE {
+  GRAPH <http://mas4ai.eu/id/graph/aas> {
+    ?SMC_parent ?p_child ?SMC .
+  }
+}
 INSERT {
   GRAPH <http://mas4ai.eu/id/graph/aas> {
-    ?SMC_parent aassmc:value ?ReferenceElement_iri .
+    ?SMC_parent ?p_child ?ReferenceElement_iri .
 
     ?ReferenceElement_iri a aas:ReferenceElement ;
       aassem:semanticId [
@@ -33,7 +38,8 @@ WHERE {
   ?Property a owl:ObjectProperty .
   FILTER EXISTS { ?SMC aassmc:value+ ?SMC }
 
-  ?SMC_parent aassmc:value ?SMC .
+  VALUES ?p_child {aassm:submodelElements aassmc:value}
+  ?SMC_parent ?p_child ?SMC .
   MINUS { ?SMC_parent aassmc:value+ ?SMC_parent }
 
   BIND(iri(concat( "http://mas4ai.eu/id/referenceElement/template/", struuid() )) as ?ReferenceElement_iri)
