@@ -37,13 +37,20 @@ WHERE {
 
   BIND ( REPLACE(str(?Resource), ".+[//#]([a-z0-9_]+)$", "$1") as ?noLabel)
   BIND ( REPLACE(COALESCE(?_idShort, ?label_en, ?label, ?noLabel), "[-//(), ]", "_") AS ?_idShort )
-  # Plural idShort on SMC for cardinality>1 properties
+
+  # Plural idShort on Submodel or SMC of not cardinality one properties
   BIND (
-    IF( EXISTS{?Object prov:wasDerivedFrom ?Property} &&
-      NOT EXISTS{ ?Property a owl:FunctionalProperty },
+    IF(
+      EXISTS {
+        ?Object prov:wasDerivedFrom ?Class , ?Property ;
+          (aassm:submodelElements|aassmc:value)/prov:wasDerivedFrom ?Class , ?Property .
+        ?Class a owl:Class .
+        { ?Property a owl:ObjectProperty } UNION { ?Property a owl:DatatypeProperty }
+      } &&
+      NOT EXISTS { ?Property a owl:FunctionalProperty },
       CONCAT(?_idShort, "s"),
-      ?_idShort )
-    AS ?idShort
+      ?_idShort
+    ) AS ?idShort
   )
 
   OPTIONAL {
