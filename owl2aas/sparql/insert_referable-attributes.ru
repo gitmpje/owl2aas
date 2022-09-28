@@ -39,8 +39,8 @@ WHERE {
   BIND ( REPLACE(COALESCE(?_idShort, ?label_en, ?label, ?noLabel), "[-//(), ]", "_") AS ?_idShort )
   # Plural idShort on SMC for cardinality>1 properties
   BIND (
-    IF( EXISTS{?Object (aassm:submodelElements|aassmc:value)/prov:wasDerivedFrom ?Property} &&
-      NOT EXISTS{ ?Property a owl:FunctionalPropery },
+    IF( EXISTS{?Object prov:wasDerivedFrom ?Property} &&
+      NOT EXISTS{ ?Property a owl:FunctionalProperty },
       CONCAT(?_idShort, "s"),
       ?_idShort )
     AS ?idShort

@@ -1,11 +1,11 @@
 DELETE {
   GRAPH <http://mas4ai.eu/id/graph/aas> {
-    ?SMC_parent ?p_child ?SMC .
+    ?SMC_parent aassmc:value ?SMC .
   }
 }
 INSERT {
   GRAPH <http://mas4ai.eu/id/graph/aas> {
-    ?SMC_parent ?p_child ?ReferenceElement_iri .
+    ?SMC_parent aassmc:value ?ReferenceElement_iri .
 
     ?ReferenceElement_iri a aas:ReferenceElement ;
       aassem:semanticId [
@@ -36,11 +36,17 @@ WHERE {
 
   ?Class a owl:Class .
   ?Property a owl:ObjectProperty .
-  FILTER EXISTS { ?SMC aassmc:value+ ?SMC }
 
-  VALUES ?p_child {aassm:submodelElements aassmc:value}
-  ?SMC_parent ?p_child ?SMC .
-  MINUS { ?SMC_parent aassmc:value+ ?SMC_parent }
+  # Find the SMC that is the entry point of the circular reference, and its parent SMC
+  FILTER EXISTS {
+    ?SMC aassmc:value+ ?SMC .
+    ?Outside_parent aassm:submodelElements|aassmc:value ?SMC .
+
+    MINUS { ?Outside_parent aassmc:value+ ?Outside_parent }
+  }
+
+  ?SMC_parent aassmc:value ?SMC .
+  FILTER EXISTS { ?SMC_parent aassmc:value+ ?SMC_parent }
 
   BIND(iri(concat( "http://mas4ai.eu/id/referenceElement/template/", struuid() )) as ?ReferenceElement_iri)
 }

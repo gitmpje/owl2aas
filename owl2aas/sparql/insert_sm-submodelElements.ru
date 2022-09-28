@@ -29,15 +29,15 @@ WHERE {
       FILTER NOT EXISTS { ?Submodel prov:wasDerivedFrom/mas4ai:hasInterface [] }
     }
   } UNION {
-    # Nested functional object properties
+    # Nested object properties for 'cardinality one submodel'
     ?Submodel a aas:Submodel ;
-      prov:wasDerivedFrom/a owl:ObjectProperty ;
+      prov:wasDerivedFrom/a owl:FunctionalProperty ;
       prov:wasDerivedFrom ?Class .
 
     ?SubmodelElement a/rdfs:subClassOf+ aas:SubmodelElement ;
       prov:wasDerivedFrom ?Property .
 
-    ?Property a owl:ObjectProperty, owl:FunctionalProperty ;
+    ?Property a owl:ObjectProperty ;
       rdfs:domain ?Class .
   } UNION {
     # Cardinality >1 (object) properties

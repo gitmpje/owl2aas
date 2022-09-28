@@ -19,11 +19,11 @@ def parse_cli_arguments() -> argparse.ArgumentParser:
                     'alternatively, those classes can be provided using --aas_class or -c argument',
         formatter_class=argparse.RawTextHelpFormatter)
 
-    parser.add_argument('input_file', help="path to OWL2 RDF file")
-    parser.add_argument('-o', '--output', help="path to store output AAS RDF file")
-    parser.add_argument('-c', '--aas_class', help="list of classes for which to generate an AAS", nargs='+', default=None)
+    parser.add_argument('input_file', help="Path to OWL2 RDF file.")
+    parser.add_argument('-o', '--output', help="Path to store output AAS RDF file.")
+    parser.add_argument('-c', '--aas_class', help="List of classes for which to generate an AAS.", nargs='+', default=None)
     parser.add_argument('-v', '--verbose', help="Print detailed information for each step in the process.", action="store_true")
-    parser.add_argument('-l', '--logfile', help="Log file to be created in addition to output to stdout", default=None)
+    parser.add_argument('-l', '--logfile', help="Log file to be created in addition to output to stdout.", default=None)
     parser.add_argument('-d', '--debug', help="Output intermediary results for debugging.", action="store_true")
 
     return parser

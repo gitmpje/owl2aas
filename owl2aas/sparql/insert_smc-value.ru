@@ -15,15 +15,6 @@ WHERE {
 
     ?Value a ?SubmodelElementType ;
       prov:wasDerivedFrom ?Property .
-  } UNION {
-    ?SMC a aas:SubmodelElementCollection ;
-      prov:wasDerivedFrom ?Class .
-
-    ?Class a owl:Class .
-    ?Property rdfs:domain ?Class .
-
-    ?Value a ?SubmodelElementType ;
-      prov:wasDerivedFrom ?Property .
 
     MINUS {
       ?Value prov:wasDerivedFrom/a owl:Class ;
