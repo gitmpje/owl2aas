@@ -8,16 +8,20 @@ WHERE {
   ?SME prov:wasDerivedFrom/^rdfs:domain/^prov:wasDerivedFrom ?SME_redundant .
   FILTER(?SME != ?SME_redundant)
 
-  MINUS {
+  FILTER NOT EXISTS {
     ?Submodel prov:wasDerivedFrom ?Class , ?Property .
     ?SME_redundant prov:wasDerivedFrom ?Class , ?Property .
     ?Class a owl:Class .
     ?Property rdfs:range ?Class .
   }
-  MINUS {
+  FILTER NOT EXISTS {
     ?Submodel prov:wasDerivedFrom ?Class , ?Property .
     ?SME_redundant prov:wasDerivedFrom ?Class , ?Property .
     ?Class mas4ai:hasInterface [] .
-    ?Property a sh:ObjectProperty .
+    ?Property a owl:ObjectProperty .
+  }
+  FILTER NOT EXISTS {
+    ?Submodel prov:wasDerivedFrom/a owl:FuntionalProperty .
+    MINUS { ?Submodel prov:wasDerivedFrom/mas4ai:hasInterface [] }
   }
 }
