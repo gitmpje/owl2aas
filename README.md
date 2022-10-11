@@ -2,7 +2,7 @@
 
 OWL2AAS is a tool to convert an [RDF based OWL 2](https://www.w3.org/TR/2012/REC-owl2-rdf-based-semantics-20121211/) ontology to a basic Asset Administration Shell (AAS) Template for Industry 4.0 Systems,
 compliant with the meta model specification provided in
-[the document “Details of the Asset Administration Shell” (v3.0RC02)](https://https://www.plattform-i40.de/IP/Redaktion/EN/Downloads/Publikation/Details_of_the_Asset_Administration_Shell_Part1_V3.html).
+[“Details of the Asset Administration Shell” (v3.0RC02)](https://www.plattform-i40.de/IP/Redaktion/EN/Downloads/Publikation/Details_of_the_Asset_Administration_Shell_Part1_V3.html).
 
 
 ## Features
