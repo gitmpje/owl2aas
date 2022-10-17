@@ -17,12 +17,12 @@ WHERE {
     WHERE {
         ?Object a/rdfs:subClassOf* aas:Referable ;
         OPTIONAL {
-          ?Object prov:wasDerivedFrom ?Class .
+          ?Object aassem:semanticId/aasref:keys/aaskey:value ?Class .
           ?Class a owl:Class ;
             rdfs:label ?classLabel .
         }
         OPTIONAL {
-          ?Object prov:wasDerivedFrom ?_Property .
+          ?Object aassem:semanticId/aasref:keys/aaskey:value ?_Property .
           { ?_Property a owl:DatatypeProperty } UNION { ?_Property a owl:ObjectProperty }
           ?_Property rdfs:label ?propertyLabel .
         }
