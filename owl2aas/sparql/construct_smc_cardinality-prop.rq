@@ -14,7 +14,10 @@ CONSTRUCT {
   .
 }
 WHERE {
-  ?Property a owl:DataTypeProperty .
+  { ?Property a owl:DataTypeProperty }
+  UNION
+  { ?Property a owl:ObjectProperty }
+
   FILTER NOT EXISTS { ?Property a owl:FunctionalProperty } # Functional properties have a maximum cardinality of one
 
   BIND(iri(concat( "http://mas4ai.eu/id/smc/template/", struuid() )) as ?SMC_iri)

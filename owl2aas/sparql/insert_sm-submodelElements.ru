@@ -1,5 +1,5 @@
 INSERT {
-  GRAPH <http://mas4ai.eu/id/graph/aas> {
+  GRAPH <http://mas4ai.eu/id/graph/aas/template> {
     ?Submodel aassm:submodelElements ?SubmodelElement .
   }
 }
@@ -22,14 +22,14 @@ WHERE {
     MINUS {
       ?Submodel a aas:Submodel .
 
-      # Only if the submodel is derived from a cardinality >1 property
+      # Only if the submodel is derived from a not cardinality one property
       FILTER NOT EXISTS { ?Submodel prov:wasDerivedFrom/a owl:FunctionalProperty }
 
       # Only if the submodel is not derived from an AAS class
       FILTER NOT EXISTS { ?Submodel prov:wasDerivedFrom/mas4ai:hasInterface [] }
     }
   } UNION {
-    # Nested object properties for 'cardinality one submodel'
+    # Nested properties for 'cardinality one submodel'
     ?Submodel a aas:Submodel ;
       prov:wasDerivedFrom/a owl:FunctionalProperty ;
       prov:wasDerivedFrom ?Class .
@@ -37,10 +37,15 @@ WHERE {
     ?SubmodelElement a/rdfs:subClassOf+ aas:SubmodelElement ;
       prov:wasDerivedFrom ?Property .
 
-    ?Property a owl:ObjectProperty ;
-      rdfs:domain ?Class .
+    ?Property rdfs:domain ?Class .
+
+    # The element should not be derived from a class, unless it is a cardinality one property
+    FILTER ( 
+      NOT EXISTS { ?SubmodelElement prov:wasDerivedFrom/a owl:Class } ||
+      EXISTS { ?Property a owl:FunctionalPropertys }
+    )
   } UNION {
-    # Cardinality >1 (object) properties
+    # Non cardinality one object properties
     ?Submodel a aas:Submodel ;
       prov:wasDerivedFrom ?Class, ?Property .
 

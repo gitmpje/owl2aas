@@ -1,5 +1,5 @@
 INSERT {
-  GRAPH <http://mas4ai.eu/id/graph/aas> {
+  GRAPH <http://mas4ai.eu/id/graph/aas/template> {
     ?SMC aassmc:value ?Value .
   }
 }
@@ -16,13 +16,13 @@ WHERE {
     ?Value a ?SubmodelElementType ;
       prov:wasDerivedFrom ?Property .
 
-    MINUS {
-      ?Value prov:wasDerivedFrom/a owl:Class ;
-        prov:wasDerivedFrom ?Property .
-      FILTER NOT EXISTS { ?Property a owl:FunctionalProperty }
-    }
+    # The value object should not be derived from a NodeShape, unless it is a cardinality one property
+    FILTER ( 
+      NOT EXISTS { ?Value prov:wasDerivedFrom/a owl:Class } ||
+      EXISTS { ?Property a owl:FunctionalProperty }
+    )
   } UNION {
-    # Cardinality>1 (datatype) properties
+    # Non cardinality one properties
     ?SMC a aas:SubmodelElementCollection ;
       prov:wasDerivedFrom ?Property .
     FILTER NOT EXISTS { ?SMC prov:wasDerivedFrom/a owl:Class }

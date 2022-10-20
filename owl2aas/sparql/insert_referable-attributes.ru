@@ -1,5 +1,5 @@
 INSERT {
-  GRAPH <http://mas4ai.eu/id/graph/aas> {
+  GRAPH <http://mas4ai.eu/id/graph/aas/template> {
     ?Object aasrefer:idShort ?idShort ;
       rdfs:label ?label ;
       aasrefer:description ?description ;
@@ -12,10 +12,12 @@ WHERE {
   { SELECT
       ?Object
       (CONCAT(?propertyLabel, "__", ?classLabel) as ?_idShort)
-      (IF(bound(?Class), ?Class, ?_Property) as ?Resource)
+      (COALESCE(?Class, ?_Property) as ?Resource)
       (IF(BOUND(?_Property), ?_Property, BNODE()) AS ?Property)
     WHERE {
-        ?Object a/rdfs:subClassOf* aas:Referable ;
+      {
+        ?Object a/rdfs:subClassOf* aas:Referable .
+        FILTER NOT EXISTS { ?Object a aas:ReferenceElement }
         OPTIONAL {
           ?Object aassem:semanticId/aasref:keys/aaskey:value ?Class .
           ?Class a owl:Class ;
@@ -26,6 +28,17 @@ WHERE {
           { ?_Property a owl:DatatypeProperty } UNION { ?_Property a owl:ObjectProperty }
           ?_Property rdfs:label ?propertyLabel .
         }
+      } UNION {
+        # In case of a Reference Element, always use both the property and class label in the idShort
+        ?Object a aas:ReferenceElement ;
+          prov:wasDerivedFrom ?_Property , ?Class .
+        
+        ?Class a owl:Class ;
+          rdfs:label ?classLabel .
+
+        { ?_Property a owl:DatatypeProperty } UNION { ?_Property a owl:ObjectProperty }
+        ?_Property rdfs:label ?propertyLabel .
+      }
   } }
 
   ?Object prov:wasDerivedFrom ?Resource .
@@ -42,9 +55,8 @@ WHERE {
   BIND (
     IF(
       EXISTS {
-        ?Object prov:wasDerivedFrom ?Class , ?Property ;
-          (aassm:submodelElements|aassmc:value)/prov:wasDerivedFrom ?Class , ?Property .
-        ?Class a owl:Class .
+        ?Object prov:wasDerivedFrom ?Property ;
+          (aassm:submodelElements|aassmc:value)/prov:wasDerivedFrom ?Property .
         { ?Property a owl:ObjectProperty } UNION { ?Property a owl:DatatypeProperty }
       } &&
       NOT EXISTS { ?Property a owl:FunctionalProperty },

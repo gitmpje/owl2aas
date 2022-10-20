@@ -1,52 +1,43 @@
+WITH <http://mas4ai.eu/id/graph/aas/template>
 DELETE {
-  GRAPH <http://mas4ai.eu/id/graph/aas> {
-    ?SMC_parent aassmc:value ?SMC .
-  }
+  ?SMC_parent aassmc:value ?SMC .
 }
 INSERT {
-  GRAPH <http://mas4ai.eu/id/graph/aas> {
-    ?SMC_parent aassmc:value ?ReferenceElement_iri .
+  ?SMC_parent aassmc:value ?ReferenceElement_iri .
 
-    ?ReferenceElement_iri a aas:ReferenceElement ;
-      aassem:semanticId [
-        a aas:Reference ;
-        aasref:keys [
-          a aas:Key ;
-          aaskey:idType aaskeyt:Iri ;
-          aaskey:value ?semanticIdValue ;
-        ] ;
+  ?ReferenceElement_iri a aas:ReferenceElement ;
+    aassem:semanticId [
+      a aas:Reference ;
+      aasref:keys [
+        a aas:Key ;
+        aaskey:idType aaskeyt:Iri ;
+        aaskey:value ?semanticIdValue ;
       ] ;
-      aasrefe:value [
-        a aas:Reference ;
-        aasref:keys [
-          a aas:Key ;
-          aaskey:idType aaskeyt:Iri ;
-          aaskey:value ?SMC ;
-        ] ;
+    ] ;
+    aasrefe:value [
+      a aas:Reference ;
+      aasref:keys [
+        a aas:Key ;
+        aaskey:idType aaskeyt:Iri ;
+        aaskey:value ?SMC ;
       ] ;
-      prov:wasDerivedFrom ?Class, ?Property ;
-      mas4ai:constructedByQuery "convert_smc_to_reference-element.ru" ;
-    .
-  }
+    ] ;
+    prov:wasDerivedFrom ?Class, ?Property ;
+    mas4ai:constructedByQuery "convert_smc_to_reference-element.ru" ;
+  .
 }
 WHERE {
   ?SMC a aas:SubmodelElementCollection ;
-    aassem:semanticId/aasref:keys/aaskey:value ?semanticIdValue ;
+    aassem:semanticId/aasref:keys/aaskey:value ?_semanticIdValue ;
     prov:wasDerivedFrom ?Class, ?Property .
 
-  ?Class a owl:Class .
-  ?Property a owl:ObjectProperty .
-
-  # Find the SMC that is the entry point of the circular reference, and its parent SMC
-  FILTER EXISTS {
-    ?SMC aassmc:value+ ?SMC .
-    ?Outside_parent aassm:submodelElements|aassmc:value ?SMC .
-
-    MINUS { ?Outside_parent aassmc:value+ ?Outside_parent }
+  GRAPH <http://mas4ai.eu/id/graph/owl> {
+    ?Class a owl:Class .
+    ?Property a owl:ObjectProperty .
   }
 
-  ?SMC_parent aassmc:value ?SMC .
-  FILTER EXISTS { ?SMC_parent aassmc:value+ ?SMC_parent }
+  # SMC should be in a circular reference
+  FILTER EXISTS { ?SMC aassmc:value+ ?SMC }
 
   BIND(iri(concat( "http://mas4ai.eu/id/referenceElement/template/", struuid() )) as ?ReferenceElement_iri)
 }
