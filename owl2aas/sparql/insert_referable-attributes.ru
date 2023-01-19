@@ -10,7 +10,24 @@ INSERT {
 WHERE {
   ?Object a/rdfs:subClassOf* aas:Referable .
 
-  { SELECT DISTINCT ?Object (GROUP_CONCAT(DISTINCT ?label) as ?_idShort) {
+  # Get other attributes from a (derived from) Resource
+  OPTIONAL { SELECT DISTINCT ?Object (SAMPLE(?_description) AS ?description) (SAMPLE(?__displayName) AS ?displayName) {
+    ?Object aassem:semanticId/aasref:keys/aaskey:value ?Resource .
+
+    OPTIONAL {
+      ?Resource rdfs:comment ?comment .
+      # If comment has no language tag, add default "en" tag
+      BIND ( IF(langMatches( lang(?comment), "*" ), ?comment, STRLANG(?comment, "en")) AS ?_description )
+    }
+
+    OPTIONAL {
+      ?Resource skos:prefLabel ?prefLabel .
+      OPTIONAL { ?Object aasrefer:displayName ?_displayName }
+      BIND ( COALESCE(?_displayName, ?prefLabel) AS ?__displayName )
+    }
+  } GROUP BY ?Object }
+
+  { SELECT DISTINCT ?Object (GROUP_CONCAT(DISTINCT ?resourceLabel) as ?_idShort) {
     {
       # In case of a Reference Element, always use both Resource labels in the idShort (independent of the semanticId)
       ?Object a aas:ReferenceElement ;
@@ -51,21 +68,4 @@ WHERE {
       ?__idShort
     ) AS ?idShort
   )
-
-  # Get other attributes from a (derived from) Resource
-  { SELECT DISTINCT ?Object (SAMPLE(?_description) AS ?description) (SAMPLE(?__displayName) AS ?displayName) {
-    ?Object aassem:semanticId/aasref:keys/aaskey:value ?Resource .
-
-    OPTIONAL {
-      ?Resource rdfs:comment ?comment .
-      # If comment has no language tag, add default "en" tag
-      BIND ( IF(langMatches( lang(?comment), "*" ), ?comment, STRLANG(?comment, "en")) AS ?_description )
-    }
-
-    OPTIONAL {
-      ?Resource skos:prefLabel ?prefLabel .
-      OPTIONAL { ?Object aasrefer:displayName ?_displayName }
-      BIND ( COALESCE(?_displayName, ?prefLabel) AS ?__displayName )
-    }
-  } GROUP BY ?Object }
 }
