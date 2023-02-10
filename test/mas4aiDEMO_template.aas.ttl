@@ -2,306 +2,329 @@
 @prefix aasaas: <https://admin-shell.io/aas/3/0/RC02/AssetAdministrationShell/> .
 @prefix aasida: <https://admin-shell.io/aas/3/0/RC02/Identifiable/> .
 @prefix aaskey: <https://admin-shell.io/aas/3/0/RC02/Key/> .
-@prefix aaskeyt: <https://admin-shell.io/aas/3/0/RC02/KeyType/> .
+@prefix aaskeyt: <https://admin-shell.io/aas/3/0/RC02/KeyTypes/> .
 @prefix aaskind: <https://admin-shell.io/aas/3/0/RC02/HasKind/> .
 @prefix aasmod: <https://admin-shell.io/aas/3/0/RC02/ModelingKind/> .
-@prefix aasprop: <https://admin-shell.io/aas/3/0/RC02/Property/> .
 @prefix aasref: <https://admin-shell.io/aas/3/0/RC02/Reference/> .
 @prefix aasrefer: <https://admin-shell.io/aas/3/0/RC02/Referable/> .
+@prefix aasreft: <https://admin-shell.io/aas/3/0/RC02/ReferenceTypes/> .
 @prefix aassem: <https://admin-shell.io/aas/3/0/RC02/HasSemantics/> .
 @prefix aassm: <https://admin-shell.io/aas/3/0/RC02/Submodel/> .
 @prefix aassmc: <https://admin-shell.io/aas/3/0/RC02/SubmodelElementCollection/> .
 @prefix assetinf: <https://admin-shell.io/aas/3/0/RC02/AssetInformation/> .
+@prefix assetkind: <https://admin-shell.io/aas/3/0/RC02/AssetKind/> .
 @prefix mas4ai: <http://example.org/MAS4AI_GenericModel#> .
 @prefix mas4aiDEMO: <http://www.tno.nl/mas4aiDEMO#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://mas4ai.eu/id/aas/template/84e0d2de-131c-405f-bf84-c43f9f340511> a aas:AssetAdministrationShell ;
+<http://mas4ai.eu/id/aas/template/10b78261-ebf6-4ee9-9d35-2b31407a87d2> a aas:AssetAdministrationShell ;
     mas4ai:constructedByQuery "construct_asset-administration-shell.rq" ;
     prov:wasDerivedFrom mas4aiDEMO:RoboticArm ;
-    aasaas:assetInformation <http://mas4ai.eu/id/asset/template/13eb0112-c138-4f5e-a029-6c6dbbdce00a> ;
-    aasaas:submodels <http://mas4ai.eu/id/sm/template/038d19c3-b792-4b84-b60d-8062340e43c2>,
-        <http://mas4ai.eu/id/sm/template/44e8185a-c9b8-4706-b9d1-81697e291cee>,
-        <http://mas4ai.eu/id/sm/template/70539683-dd74-4c4d-9f84-09fc672f9cb6>,
-        <http://mas4ai.eu/id/sm/template/e63012f3-9b33-478b-8da4-68aeab141ddd> ;
-    aasida:id "http://mas4ai.eu/id/aas/template/84e0d2de-131c-405f-bf84-c43f9f340511"^^xsd:string ;
-    aasrefer:idShort "Robotic_Arm" .
-
-<http://mas4ai.eu/id/smc/template/6a3b10b3-2b3a-4cfa-a300-0edca76e25fb> a aas:SubmodelElementCollection ;
-    mas4ai:constructedByQuery "construct_smc_cardinality.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:hasJoint ;
-    aaskind:kind aasmod:Template ;
-    aassem:semanticId [ a aas:Reference ;
+    aasaas:assetInformation <http://mas4ai.eu/id/asset/template/ab5454fe-1f09-4e58-ac06-b5039f701439> ;
+    aasaas:submodels [ a aas:Reference ;
             aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:hasJoint ] ] ;
-    aasrefer:description "Relating a robotic arm to its joints"@en ;
-    aasrefer:displayName "Has joint" ;
-    aasrefer:idShort "Has_joint" ;
-    aassmc:value <http://mas4ai.eu/id/smc/template/1ebec686-253d-467a-9089-08755961aaa2> .
-
-<http://mas4ai.eu/id/smc/template/7c197a1f-88ea-4c87-9fc1-304d5d5729a6> a aas:SubmodelElementCollection ;
-    mas4ai:constructedByQuery "construct_smc_cardinality.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:usesTool ;
-    aaskind:kind aasmod:Template ;
-    aassem:semanticId [ a aas:Reference ;
+                    aaskey:type aaskeyt:Submodel ;
+                    aaskey:value "http://mas4ai.eu/id/sm/template/4d4ff11c-c4f0-40ce-9ec6-6265839d7b58" ] ;
+            aasref:type aasreft:ModelReference ],
+        [ a aas:Reference ;
             aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:usesTool ] ] ;
-    aasrefer:description "Relates a robotic arm to the tool it is currently equiped with"@en ;
-    aasrefer:displayName "Uses tool" ;
-    aasrefer:idShort "Uses_tool" ;
-    aassmc:value <http://mas4ai.eu/id/smc/template/35482972-4a5b-4eb3-ba21-40c6fb0f91af> .
-
-<http://mas4ai.eu/id/asset/template/13eb0112-c138-4f5e-a029-6c6dbbdce00a> a aas:AssetInformation ;
-    assetinf:globalAssetId [ a aas:Reference ;
-            aasref:referredSemanticId [ a aas:Reference ;
-                    aasref:keys [ a aas:Key ;
-                            aaskey:idType aaskeyt:Iri ;
-                            aaskey:value mas4aiDEMO:RoboticArm ] ] ] .
-
-<http://mas4ai.eu/id/property/template/2ee06afd-2ec9-4364-85e4-61baf96f1241> a aas:Property ;
-    mas4ai:constructedByQuery "construct_property.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:hasWidth ;
-    aaskind:kind aasmod:Template ;
-    aassem:semanticId [ a aas:Reference ;
+                    aaskey:type aaskeyt:Submodel ;
+                    aaskey:value "http://mas4ai.eu/id/sm/template/5514a53e-2a06-4dc3-9fa1-35953f0914e1" ] ;
+            aasref:type aasreft:ModelReference ],
+        [ a aas:Reference ;
             aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:hasWidth ] ] ;
-    aasprop:valueType xsd:integer ;
-    aasrefer:description "The width of the robotic arm, expressed in cm"@en ;
-    aasrefer:displayName "Has width" ;
-    aasrefer:idShort "Has_width" .
-
-<http://mas4ai.eu/id/property/template/40000abf-33c4-4a48-8dd8-96053769fad9> a aas:Property ;
-    mas4ai:constructedByQuery "construct_property.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:hasRange ;
-    aaskind:kind aasmod:Template ;
-    aassem:semanticId [ a aas:Reference ;
+                    aaskey:type aaskeyt:Submodel ;
+                    aaskey:value "http://mas4ai.eu/id/sm/template/f859b0de-3ad7-4b84-9312-9cab7c137778" ] ;
+            aasref:type aasreft:ModelReference ],
+        [ a aas:Reference ;
             aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:hasRange ] ] ;
-    aasprop:valueType xsd:decimal ;
-    aasrefer:description "The range over which a joint can articulate, expressed in the amount of degrees between the two limits of rotation"@en ;
-    aasrefer:displayName "Has range" ;
-    aasrefer:idShort "Has_range" .
+                    aaskey:type aaskeyt:Submodel ;
+                    aaskey:value "http://mas4ai.eu/id/sm/template/a8f8e0c1-64d9-455e-84dd-1674bef50b6a" ] ;
+            aasref:type aasreft:ModelReference ] ;
+    aasida:id "http://mas4ai.eu/id/aas/template/10b78261-ebf6-4ee9-9d35-2b31407a87d2"^^xsd:string .
 
-<http://mas4ai.eu/id/property/template/5dbc8d75-e70e-438d-b509-6f3eaaf16af4> a aas:Property ;
-    mas4ai:constructedByQuery "construct_property.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:manualLocation ;
-    aaskind:kind aasmod:Template ;
-    aassem:semanticId [ a aas:Reference ;
-            aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:manualLocation ] ] ;
-    aasprop:valueType xsd:anyURI ;
-    aasrefer:description "The web location of the user manual associated with the used tool"@en ;
-    aasrefer:displayName "Manual location" ;
-    aasrefer:idShort "Manual_location" .
-
-<http://mas4ai.eu/id/property/template/6812486e-ac33-4777-a993-a58489b72be1> a aas:Property ;
-    mas4ai:constructedByQuery "construct_property.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:hasHeight ;
-    aaskind:kind aasmod:Template ;
-    aassem:semanticId [ a aas:Reference ;
-            aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:hasHeight ] ] ;
-    aasprop:valueType xsd:integer ;
-    aasrefer:description "The height of the robotic arm, expressed in cm"@en ;
-    aasrefer:displayName "Has height" ;
-    aasrefer:idShort "Has_height" .
-
-<http://mas4ai.eu/id/property/template/720099c7-eb06-445f-ae2b-8afc7bf22969> a aas:Property ;
-    mas4ai:constructedByQuery "construct_property.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:hasDepth ;
-    aaskind:kind aasmod:Template ;
-    aassem:semanticId [ a aas:Reference ;
-            aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:hasDepth ] ] ;
-    aasprop:valueType xsd:integer ;
-    aasrefer:description "The depth of the robotic arm in centimeters"@en ;
-    aasrefer:displayName "Has depth" ;
-    aasrefer:idShort "Has_depth" .
-
-<http://mas4ai.eu/id/property/template/e4f1e65b-e7af-4129-92d6-6713cc0a3ab1> a aas:Property ;
-    mas4ai:constructedByQuery "construct_property.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:hasVersionNumber ;
-    aaskind:kind aasmod:Template ;
-    aassem:semanticId [ a aas:Reference ;
-            aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:hasVersionNumber ] ] ;
-    aasprop:valueType xsd:integer ;
-    aasrefer:description "The version number of a piece of software"@en ;
-    aasrefer:displayName "Has version number" ;
-    aasrefer:idShort "Has_version_number" .
-
-<http://mas4ai.eu/id/property/template/e7939ac7-49c3-4492-aad6-f01380f2be88> a aas:Property ;
-    mas4ai:constructedByQuery "construct_property.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:rotation ;
-    aaskind:kind aasmod:Template ;
-    aassem:semanticId [ a aas:Reference ;
-            aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:rotation ] ] ;
-    aasprop:valueType xsd:integer ;
-    aasrefer:description "The rotation in degrees"@en ;
-    aasrefer:displayName "Rotation" ;
-    aasrefer:idShort "Rotation" .
-
-<http://mas4ai.eu/id/property/template/f8809d3e-2451-4a77-81cb-708b13c95d43> a aas:Property ;
-    mas4ai:constructedByQuery "construct_property.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:hasMaxSpeed ;
-    aaskind:kind aasmod:Template ;
-    aassem:semanticId [ a aas:Reference ;
-            aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:hasMaxSpeed ] ] ;
-    aasprop:valueType xsd:decimal ;
-    aasrefer:description "The maximum speed of rotation of a joint, expressed in degrees per second"@en ;
-    aasrefer:displayName "Has maximum speed" ;
-    aasrefer:idShort "Has_Maximum_speed" .
-
-<http://mas4ai.eu/id/sm/template/038d19c3-b792-4b84-b60d-8062340e43c2> a aas:Submodel ;
-    mas4ai:constructedByQuery "construct_submodel.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:Tool,
-        mas4aiDEMO:usesTool ;
-    aaskind:kind aasmod:Template ;
-    aassem:semanticId [ a aas:Reference ;
-            aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:usesTool ] ] ;
-    aasida:id "http://mas4ai.eu/id/sm/template/038d19c3-b792-4b84-b60d-8062340e43c2"^^xsd:string ;
-    aasrefer:description "Relates a robotic arm to the tool it is currently equiped with"@en ;
-    aasrefer:displayName "Uses tool" ;
-    aasrefer:idShort "Uses_tool" ;
-    aassm:submodelElements <http://mas4ai.eu/id/smc/template/35482972-4a5b-4eb3-ba21-40c6fb0f91af> .
-
-<http://mas4ai.eu/id/sm/template/44e8185a-c9b8-4706-b9d1-81697e291cee> a aas:Submodel ;
+<http://mas4ai.eu/id/sm/template/4d4ff11c-c4f0-40ce-9ec6-6265839d7b58> a aas:Submodel ;
     mas4ai:constructedByQuery "construct_submodel.rq" ;
     prov:wasDerivedFrom mas4aiDEMO:RoboticArm ;
     aaskind:kind aasmod:Template ;
     aassem:semanticId [ a aas:Reference ;
             aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:RoboticArm ] ] ;
-    aasida:id "http://mas4ai.eu/id/sm/template/44e8185a-c9b8-4706-b9d1-81697e291cee"^^xsd:string ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#RoboticArm"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasida:id "http://mas4ai.eu/id/sm/template/4d4ff11c-c4f0-40ce-9ec6-6265839d7b58"^^xsd:string ;
     aasrefer:description "A robot arm which can be used for a variety of different manufacturing tasks depending on the equiped tool"@en ;
     aasrefer:displayName "Robotic Arm"@en ;
     aasrefer:idShort "Robotic_Arm" ;
-    aassm:submodelElements <http://mas4ai.eu/id/property/template/2ee06afd-2ec9-4364-85e4-61baf96f1241>,
-        <http://mas4ai.eu/id/property/template/6812486e-ac33-4777-a993-a58489b72be1>,
-        <http://mas4ai.eu/id/property/template/720099c7-eb06-445f-ae2b-8afc7bf22969>,
-        <http://mas4ai.eu/id/property/template/92211d96-b5ba-4a89-9358-da9b31a2b14d>,
-        <http://mas4ai.eu/id/property/template/b1e83bb5-8f5d-4282-9482-d3a952acb6f0> .
+    aassm:submodelElements <http://mas4ai.eu/id/property/template/07dc01c9-2c90-4067-a80e-67c476b532f4>,
+        <http://mas4ai.eu/id/property/template/183dce45-f7e7-4638-aaee-d0b73dd48455>,
+        <http://mas4ai.eu/id/property/template/71a7a3f6-0588-4847-abcf-0f456cf8d205>,
+        <http://mas4ai.eu/id/property/template/9be1ef96-d199-4c8f-9309-a1b8a453aed3>,
+        <http://mas4ai.eu/id/property/template/f9f03aca-0c97-4bf8-bddd-b4e41c2377d0> .
 
-<http://mas4ai.eu/id/sm/template/70539683-dd74-4c4d-9f84-09fc672f9cb6> a aas:Submodel ;
+<http://mas4ai.eu/id/sm/template/5514a53e-2a06-4dc3-9fa1-35953f0914e1> a aas:Submodel ;
     mas4ai:constructedByQuery "construct_submodel.rq" ;
     prov:wasDerivedFrom mas4aiDEMO:Joint,
         mas4aiDEMO:hasJoint ;
     aaskind:kind aasmod:Template ;
     aassem:semanticId [ a aas:Reference ;
             aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:hasJoint ] ] ;
-    aasida:id "http://mas4ai.eu/id/sm/template/70539683-dd74-4c4d-9f84-09fc672f9cb6"^^xsd:string ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#hasJoint"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasida:id "http://mas4ai.eu/id/sm/template/5514a53e-2a06-4dc3-9fa1-35953f0914e1"^^xsd:string ;
     aasrefer:description "Relating a robotic arm to its joints"@en ;
     aasrefer:displayName "Has joint" ;
     aasrefer:idShort "Has_joint" ;
-    aassm:submodelElements <http://mas4ai.eu/id/smc/template/1ebec686-253d-467a-9089-08755961aaa2> .
+    aassm:submodelElements <http://mas4ai.eu/id/smc/template/51ded62e-c1ef-49ca-b8ce-1eb378c4aee6> .
 
-<http://mas4ai.eu/id/sm/template/e63012f3-9b33-478b-8da4-68aeab141ddd> a aas:Submodel ;
+<http://mas4ai.eu/id/sm/template/a8f8e0c1-64d9-455e-84dd-1674bef50b6a> a aas:Submodel ;
     mas4ai:constructedByQuery "construct_submodel.rq" ;
     prov:wasDerivedFrom mas4aiDEMO:Software,
         mas4aiDEMO:controlledBy ;
     aaskind:kind aasmod:Template ;
     aassem:semanticId [ a aas:Reference ;
             aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:Software ],
-                [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:controlledBy ] ] ;
-    aasida:id "http://mas4ai.eu/id/sm/template/e63012f3-9b33-478b-8da4-68aeab141ddd"^^xsd:string ;
-    aasrefer:description "The software controlling a robotic arm"@en ;
-    aasrefer:displayName "Software" ;
-    aasrefer:idShort "Software_Controlled_by" ;
-    aassm:submodelElements <http://mas4ai.eu/id/property/template/e4f1e65b-e7af-4129-92d6-6713cc0a3ab1> .
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#controlledBy"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasida:id "http://mas4ai.eu/id/sm/template/a8f8e0c1-64d9-455e-84dd-1674bef50b6a"^^xsd:string ;
+    aasrefer:description "Relating a robotic arm to a software instruction set controlling a given arm"@en ;
+    aasrefer:displayName "Controlled by" ;
+    aasrefer:idShort "Controlled_by" ;
+    aassm:submodelElements <http://mas4ai.eu/id/property/template/4270c389-f890-4b03-826d-2854df5a3c06> .
 
-<http://mas4ai.eu/id/smc/template/cb681261-a20e-4cbc-bf2e-4dc048bad4b9> a aas:SubmodelElementCollection ;
+<http://mas4ai.eu/id/sm/template/f859b0de-3ad7-4b84-9312-9cab7c137778> a aas:Submodel ;
+    mas4ai:constructedByQuery "construct_submodel.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:Tool,
+        mas4aiDEMO:usesTool ;
+    aaskind:kind aasmod:Template ;
+    aassem:semanticId [ a aas:Reference ;
+            aasref:keys [ a aas:Key ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#usesTool"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasida:id "http://mas4ai.eu/id/sm/template/f859b0de-3ad7-4b84-9312-9cab7c137778"^^xsd:string ;
+    aasrefer:description "Relates a robotic arm to the tool it is currently equiped with"@en ;
+    aasrefer:displayName "Uses tool" ;
+    aasrefer:idShort "Uses_tool" ;
+    aassm:submodelElements <http://mas4ai.eu/id/smc/template/06010f38-4a54-4389-8af9-09a6198bef2e> .
+
+<http://mas4ai.eu/id/smc/template/4b2723be-3643-4ca8-ab08-b6da93d30787> a aas:SubmodelElementCollection ;
+    mas4ai:constructedByQuery "construct_smc_cardinality.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:hasJoint ;
+    aaskind:kind aasmod:Template ;
+    aassem:semanticId [ a aas:Reference ;
+            aasref:keys [ a aas:Key ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#hasJoint"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasrefer:description "Relating a robotic arm to its joints"@en ;
+    aasrefer:displayName "Has joint" ;
+    aasrefer:idShort "Has_joint" ;
+    aassmc:value <http://mas4ai.eu/id/smc/template/51ded62e-c1ef-49ca-b8ce-1eb378c4aee6> .
+
+<http://mas4ai.eu/id/smc/template/6d6ee774-56c6-439e-8fd9-07813579701c> a aas:SubmodelElementCollection ;
+    mas4ai:constructedByQuery "construct_smc_cardinality.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:usesTool ;
+    aaskind:kind aasmod:Template ;
+    aassem:semanticId [ a aas:Reference ;
+            aasref:keys [ a aas:Key ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#usesTool"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasrefer:description "Relates a robotic arm to the tool it is currently equiped with"@en ;
+    aasrefer:displayName "Uses tool" ;
+    aasrefer:idShort "Uses_tool" ;
+    aassmc:value <http://mas4ai.eu/id/smc/template/06010f38-4a54-4389-8af9-09a6198bef2e> .
+
+<http://mas4ai.eu/id/asset/template/ab5454fe-1f09-4e58-ac06-b5039f701439> a aas:AssetInformation ;
+    assetinf:assetKind assetkind:Type ;
+    assetinf:globalAssetId [ a aas:Reference ;
+            aasref:referredSemanticId [ a aas:Reference ;
+                    aasref:keys [ a aas:Key ;
+                            aaskey:type aaskeyt:GlobalReference ;
+                            aaskey:value "http://www.tno.nl/mas4aiDEMO#RoboticArm"^^xsd:string ] ;
+                    aasref:type aasreft:GlobalReference ] ;
+            aasref:type aasreft:GlobalReference ] .
+
+<http://mas4ai.eu/id/property/template/07dc01c9-2c90-4067-a80e-67c476b532f4> a aas:Property ;
+    mas4ai:constructedByQuery "construct_property.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:hasDepth ;
+    aaskind:kind aasmod:Template ;
+    aassem:semanticId [ a aas:Reference ;
+            aasref:keys [ a aas:Key ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#hasDepth"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasrefer:description "The depth of the robotic arm in centimeters"@en ;
+    aasrefer:displayName "Has depth" ;
+    aasrefer:idShort "Has_depth" .
+
+<http://mas4ai.eu/id/property/template/403debca-6142-4425-9168-e60da8e906b3> a aas:Property ;
+    mas4ai:constructedByQuery "construct_property.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:rotation ;
+    aaskind:kind aasmod:Template ;
+    aassem:semanticId [ a aas:Reference ;
+            aasref:keys [ a aas:Key ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#rotation"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasrefer:description "The rotation in degrees"@en ;
+    aasrefer:displayName "Rotation" ;
+    aasrefer:idShort "Rotation" .
+
+<http://mas4ai.eu/id/property/template/4270c389-f890-4b03-826d-2854df5a3c06> a aas:Property ;
+    mas4ai:constructedByQuery "construct_property.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:hasVersionNumber ;
+    aaskind:kind aasmod:Template ;
+    aassem:semanticId [ a aas:Reference ;
+            aasref:keys [ a aas:Key ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#hasVersionNumber"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasrefer:description "The version number of a piece of software"@en ;
+    aasrefer:displayName "Has version number" ;
+    aasrefer:idShort "Has_version_number" .
+
+<http://mas4ai.eu/id/property/template/71a7a3f6-0588-4847-abcf-0f456cf8d205> a aas:Property ;
+    mas4ai:constructedByQuery "construct_property.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:hasWidth ;
+    aaskind:kind aasmod:Template ;
+    aassem:semanticId [ a aas:Reference ;
+            aasref:keys [ a aas:Key ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#hasWidth"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasrefer:description "The width of the robotic arm, expressed in cm"@en ;
+    aasrefer:displayName "Has width" ;
+    aasrefer:idShort "Has_width" .
+
+<http://mas4ai.eu/id/property/template/9be1ef96-d199-4c8f-9309-a1b8a453aed3> a aas:Property ;
+    mas4ai:constructedByQuery "construct_property.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:hasHeight ;
+    aaskind:kind aasmod:Template ;
+    aassem:semanticId [ a aas:Reference ;
+            aasref:keys [ a aas:Key ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#hasHeight"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasrefer:description "The height of the robotic arm, expressed in cm"@en ;
+    aasrefer:displayName "Has height" ;
+    aasrefer:idShort "Has_height" .
+
+<http://mas4ai.eu/id/property/template/bcf8f774-fcac-4c3c-b5cd-4aa36820b34d> a aas:Property ;
+    mas4ai:constructedByQuery "construct_property.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:hasMaxSpeed ;
+    aaskind:kind aasmod:Template ;
+    aassem:semanticId [ a aas:Reference ;
+            aasref:keys [ a aas:Key ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#hasMaxSpeed"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasrefer:description "The maximum speed of rotation of a joint, expressed in degrees per second"@en ;
+    aasrefer:displayName "Has maximum speed" ;
+    aasrefer:idShort "Has_Maximum_speed" .
+
+<http://mas4ai.eu/id/property/template/bd36cf75-c804-49ac-a0ad-2fc0b36f1cab> a aas:Property ;
+    mas4ai:constructedByQuery "construct_property.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:manualLocation ;
+    aaskind:kind aasmod:Template ;
+    aassem:semanticId [ a aas:Reference ;
+            aasref:keys [ a aas:Key ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#manualLocation"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasrefer:description "The web location of the user manual associated with the used tool"@en ;
+    aasrefer:displayName "Manual location" ;
+    aasrefer:idShort "Manual_location" .
+
+<http://mas4ai.eu/id/property/template/cf652ffe-a07a-4bcb-b800-fda5b6380b65> a aas:Property ;
+    mas4ai:constructedByQuery "construct_property.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:hasRange ;
+    aaskind:kind aasmod:Template ;
+    aassem:semanticId [ a aas:Reference ;
+            aasref:keys [ a aas:Key ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#hasRange"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasrefer:description "The range over which a joint can articulate, expressed in the amount of degrees between the two limits of rotation"@en ;
+    aasrefer:displayName "Has range" ;
+    aasrefer:idShort "Has_range" .
+
+<http://mas4ai.eu/id/smc/template/c2653c7b-d9ad-4f04-a133-577bde3836a0> a aas:SubmodelElementCollection ;
     mas4ai:constructedByQuery "construct_smc_non-aas-class.rq" ;
     prov:wasDerivedFrom mas4aiDEMO:Position,
         mas4aiDEMO:hasPosition ;
     aaskind:kind aasmod:Template ;
     aassem:semanticId [ a aas:Reference ;
             aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:hasPosition ],
-                [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:Position ] ] ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#Position"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
     aasrefer:description "Position of an object"@en ;
     aasrefer:displayName "Object Position" ;
-    aasrefer:idShort "Position_Has_position" ;
-    aassmc:value <http://mas4ai.eu/id/property/template/e7939ac7-49c3-4492-aad6-f01380f2be88> .
+    aasrefer:idShort "Position" ;
+    aassmc:value <http://mas4ai.eu/id/property/template/403debca-6142-4425-9168-e60da8e906b3> .
 
-<http://mas4ai.eu/id/property/template/92211d96-b5ba-4a89-9358-da9b31a2b14d> a aas:Property ;
-    mas4ai:constructedByQuery "construct_property.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:hasWeight ;
-    aaskind:kind aasmod:Template ;
-    aassem:semanticId [ a aas:Reference ;
-            aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:hasWeight ] ] ;
-    aasprop:valueType xsd:integer ;
-    aasrefer:description "The weight of a piece of manufacturing equipment, expressed in Kg"@en ;
-    aasrefer:displayName "Has weight" ;
-    aasrefer:idShort "Has_weight" .
-
-<http://mas4ai.eu/id/property/template/b1e83bb5-8f5d-4282-9482-d3a952acb6f0> a aas:MultiLanguageProperty ;
+<http://mas4ai.eu/id/property/template/183dce45-f7e7-4638-aaee-d0b73dd48455> a aas:MultiLanguageProperty ;
     mas4ai:constructedByQuery "construct_multi-lang-property.rq" ;
     prov:wasDerivedFrom mas4aiDEMO:resourceName ;
     aaskind:kind aasmod:Template ;
     aassem:semanticId [ a aas:Reference ;
             aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:resourceName ] ] ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#resourceName"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
     aasrefer:description "The name of the resource"@en ;
     aasrefer:displayName "Resource name" ;
     aasrefer:idShort "Resource_name" .
 
-<http://mas4ai.eu/id/smc/template/1ebec686-253d-467a-9089-08755961aaa2> a aas:SubmodelElementCollection ;
-    mas4ai:constructedByQuery "construct_smc_non-aas-class.rq" ;
-    prov:wasDerivedFrom mas4aiDEMO:Joint,
-        mas4aiDEMO:hasJoint ;
+<http://mas4ai.eu/id/property/template/f9f03aca-0c97-4bf8-bddd-b4e41c2377d0> a aas:Property ;
+    mas4ai:constructedByQuery "construct_property.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:hasWeight ;
     aaskind:kind aasmod:Template ;
     aassem:semanticId [ a aas:Reference ;
             aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:Joint ] ] ;
-    aasrefer:description "A point around which two beams articulate at a specified speed over a specified range"@en ;
-    aasrefer:displayName "Joint" ;
-    aasrefer:idShort "Joint" ;
-    aassmc:value <http://mas4ai.eu/id/property/template/40000abf-33c4-4a48-8dd8-96053769fad9>,
-        <http://mas4ai.eu/id/property/template/f8809d3e-2451-4a77-81cb-708b13c95d43>,
-        <http://mas4ai.eu/id/smc/template/cb681261-a20e-4cbc-bf2e-4dc048bad4b9> .
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#hasWeight"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasrefer:description "The weight of a piece of manufacturing equipment, expressed in Kg"@en ;
+    aasrefer:displayName "Has weight" ;
+    aasrefer:idShort "Has_weight" .
 
-<http://mas4ai.eu/id/smc/template/35482972-4a5b-4eb3-ba21-40c6fb0f91af> a aas:SubmodelElementCollection ;
+<http://mas4ai.eu/id/smc/template/06010f38-4a54-4389-8af9-09a6198bef2e> a aas:SubmodelElementCollection ;
     mas4ai:constructedByQuery "construct_smc_non-aas-class.rq" ;
     prov:wasDerivedFrom mas4aiDEMO:Tool,
         mas4aiDEMO:usesTool ;
     aaskind:kind aasmod:Template ;
     aassem:semanticId [ a aas:Reference ;
             aasref:keys [ a aas:Key ;
-                    aaskey:idType aaskeyt:Iri ;
-                    aaskey:value mas4aiDEMO:Tool ] ] ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#Tool"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
     aasrefer:description "A tool which may be used by a robotic arm to have it fullfill a variety of functions"@en ;
     aasrefer:displayName "Tool" ;
     aasrefer:idShort "Tool" ;
-    aassmc:value <http://mas4ai.eu/id/property/template/5dbc8d75-e70e-438d-b509-6f3eaaf16af4>,
-        <http://mas4ai.eu/id/property/template/92211d96-b5ba-4a89-9358-da9b31a2b14d>,
-        <http://mas4ai.eu/id/property/template/b1e83bb5-8f5d-4282-9482-d3a952acb6f0> .
+    aassmc:value <http://mas4ai.eu/id/property/template/183dce45-f7e7-4638-aaee-d0b73dd48455>,
+        <http://mas4ai.eu/id/property/template/bd36cf75-c804-49ac-a0ad-2fc0b36f1cab>,
+        <http://mas4ai.eu/id/property/template/f9f03aca-0c97-4bf8-bddd-b4e41c2377d0> .
+
+<http://mas4ai.eu/id/smc/template/51ded62e-c1ef-49ca-b8ce-1eb378c4aee6> a aas:SubmodelElementCollection ;
+    mas4ai:constructedByQuery "construct_smc_non-aas-class.rq" ;
+    prov:wasDerivedFrom mas4aiDEMO:Joint,
+        mas4aiDEMO:hasJoint ;
+    aaskind:kind aasmod:Template ;
+    aassem:semanticId [ a aas:Reference ;
+            aasref:keys [ a aas:Key ;
+                    aaskey:type aaskeyt:GlobalReference ;
+                    aaskey:value "http://www.tno.nl/mas4aiDEMO#Joint"^^xsd:string ] ;
+            aasref:type aasreft:GlobalReference ] ;
+    aasrefer:description "A point around which two beams articulate at a specified speed over a specified range"@en ;
+    aasrefer:displayName "Joint" ;
+    aasrefer:idShort "Joint" ;
+    aassmc:value <http://mas4ai.eu/id/property/template/bcf8f774-fcac-4c3c-b5cd-4aa36820b34d>,
+        <http://mas4ai.eu/id/property/template/cf652ffe-a07a-4bcb-b800-fda5b6380b65>,
+        <http://mas4ai.eu/id/smc/template/c2653c7b-d9ad-4f04-a133-577bde3836a0> .
 

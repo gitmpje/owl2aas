@@ -3,10 +3,11 @@ CONSTRUCT {
   ?Property_iri a aas:MultiLanguageProperty ;
     aassem:semanticId [
       a aas:Reference ;
+      aasref:type aasreft:GlobalReference ;
       aasref:keys [
         a aas:Key ;
-        aaskey:idType aaskeyt:Iri ;
-        aaskey:value ?Property ;
+        aaskey:type aaskeyt:GlobalReference ;
+        aaskey:value ?PropertyStr ;
       ] ;
     ] ;
     prov:wasDerivedFrom ?Property ;
@@ -17,5 +18,6 @@ WHERE {
   ?Property a owl:DatatypeProperty ; #filter out reference properties
     rdfs:range rdf:langString .
 
+  BIND(strdt(str(?Property), xsd:string) AS ?PropertyStr)
   BIND(iri(concat( "http://mas4ai.eu/id/property/template/", struuid() )) as ?Property_iri)
 }
